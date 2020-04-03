@@ -1,28 +1,38 @@
-package com.hotaru.beans;
+package com.hotaru.database.entities;
+
+import com.hotaru.core.database.Identifiable;
 
 import javax.persistence.*;
 
-@Entity
-public class User {
+@Entity(name = "employee")
+public class Employee implements Identifiable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name="first_name")
     private String firstName;
 
-    @Column
+    @Column(name="middle_name")
     private String middleName;
 
-    @Column
+    @Column(name="last_name")
     private String lastName;
 
-    public User() {}
+    public Employee() {}
 
+    public Employee(String firstName, String middleName, String lastName) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+    }
+
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
