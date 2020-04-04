@@ -19,12 +19,16 @@ public class Employee implements Identifiable {
     @Column(name="last_name")
     private String lastName;
 
+    @Column(name="active")
+    private boolean active;
+
     public Employee() {}
 
     public Employee(String firstName, String middleName, String lastName) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
+        this.active = true;
     }
 
     @Override
@@ -59,5 +63,13 @@ public class Employee implements Identifiable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
