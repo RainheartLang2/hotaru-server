@@ -5,6 +5,10 @@
 	<display-name>Restful Web Application</display-name>
 
 	<filter-mapping>
+		<filter-name>corsFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>dbTransactionFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
