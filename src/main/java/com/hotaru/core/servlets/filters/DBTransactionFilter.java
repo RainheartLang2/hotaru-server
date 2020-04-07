@@ -1,6 +1,7 @@
 package com.hotaru.core.servlets.filters;
 
 import com.hotaru.core.database.SessionFactoryHolder;
+import org.hibernate.Session;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -11,8 +12,10 @@ public class DBTransactionFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        SessionFactoryHolder.getInstance().getCurrentSession().beginTransaction();
-        filterChain.doFilter(servletRequest, servletResponse);
-        SessionFactoryHolder.getInstance().getCurrentSession().getTransaction().commit();
+        try (Session session = SessionFactoryHolder.getInstance().getCurrentSession()) {
+            session.beginTransaction();
+            filterChain.doFilter(servletRequest, servletResponse);
+            session.getTransaction().commit();
+        }
     }
 }

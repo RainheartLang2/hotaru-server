@@ -19,6 +19,9 @@ public class Employee implements Identifiable {
     @Column(name="last_name")
     private String lastName;
 
+    @Column(name="deleted")
+    private boolean deleted;
+
     @Column(name="active")
     private boolean active;
 
@@ -28,6 +31,7 @@ public class Employee implements Identifiable {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
+        this.deleted = false;
         this.active = true;
     }
 
@@ -63,6 +67,14 @@ public class Employee implements Identifiable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public boolean isActive() {
