@@ -19,13 +19,15 @@ public class EmployeesService {
 
     @POST
     @Path("/add")
-    public void add(Employee employee) {
+    public int add(Employee employee) {
         EmployeeResource.getInstance().saveOrUpdate(employee);
+        return employee.getId();
     }
 
     @DELETE
     @Path("/delete")
-    public void delete(@QueryParam("id") int id) {
+    public boolean delete(@QueryParam("id") int id) {
         EmployeeResource.getInstance().delete(id);
+        return true;
     }
 }

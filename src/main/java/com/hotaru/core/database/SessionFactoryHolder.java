@@ -1,5 +1,6 @@
 package com.hotaru.core.database;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -17,10 +18,20 @@ public class SessionFactoryHolder {
         initialized = true;
     }
 
+    public static void destroy() {
+        if (initialized) {
+            FACTORY.close();
+        }
+    }
+
     public static SessionFactory getInstance() {
         if (!initialized) {
             throw new RuntimeException("Session factory not initialized");
         }
         return FACTORY;
+    }
+
+    public static Session getSession() {
+        return FACTORY.getCurrentSession();
     }
 }

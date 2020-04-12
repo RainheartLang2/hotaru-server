@@ -4,6 +4,7 @@ import com.hotaru.core.database.Identifiable;
 
 import javax.persistence.*;
 
+@Table(name="employee")
 @Entity(name = "employee")
 public class Employee implements Identifiable {
     @Id

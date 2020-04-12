@@ -17,8 +17,7 @@ public class ResourceBase<E extends Identifiable> {
         try {
             this.serviceInstance = (E) this.daoClass.getConstructor(new Class[]{}).newInstance();
         } catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            //TODO: replace exception
-            throw new RuntimeException(e);
+            throw new RuntimeException("Instance of " + daoClass.getName() + " failed to be instantiated", e);
         }
     }
 
@@ -27,7 +26,6 @@ public class ResourceBase<E extends Identifiable> {
     }
 
     public List<E> getAll() {
-        //TODO: remove deprecated method
         return getSession().createCriteria(daoClass).list();
     }
 
@@ -41,6 +39,6 @@ public class ResourceBase<E extends Identifiable> {
     }
 
     protected Session getSession() {
-        return SessionFactoryHolder.getInstance().getCurrentSession();
+        return SessionFactoryHolder.getSession();
     }
 }

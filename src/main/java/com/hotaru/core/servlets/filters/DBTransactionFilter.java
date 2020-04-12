@@ -12,10 +12,9 @@ public class DBTransactionFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        try (Session session = SessionFactoryHolder.getInstance().getCurrentSession()) {
-            session.beginTransaction();
-            filterChain.doFilter(servletRequest, servletResponse);
-            session.getTransaction().commit();
-        }
+        Session session = SessionFactoryHolder.getSession();
+        session.beginTransaction();
+        filterChain.doFilter(servletRequest, servletResponse);
+        session.getTransaction().commit();
     }
 }
