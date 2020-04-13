@@ -24,7 +24,7 @@ public class Employee implements Identifiable {
     private boolean deleted;
 
     @Column(name="active")
-    private boolean active;
+    private Boolean active;
 
     public Employee() {}
 
@@ -78,11 +78,26 @@ public class Employee implements Identifiable {
         this.deleted = deleted;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public void merge(Employee employee) {
+        if (employee.getFirstName() != null) {
+            this.setFirstName(employee.getFirstName());
+        }
+        if (employee.getMiddleName() != null) {
+            this.setMiddleName(employee.getMiddleName());
+        }
+        if (employee.getLastName() != null) {
+            this.setLastName(employee.getLastName());
+        }
+        if (employee.isActive() != null) {
+            this.setActive(employee.isActive());
+        }
     }
 }

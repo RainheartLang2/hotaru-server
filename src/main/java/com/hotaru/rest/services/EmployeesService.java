@@ -24,6 +24,16 @@ public class EmployeesService {
         return employee.getId();
     }
 
+    @POST
+    @Path("/edit")
+    public boolean updateEmployee(Employee employee) {
+        EmployeeResource resource = EmployeeResource.getInstance();
+        Employee updatedEmployee = resource.getById(employee.getId());
+        updatedEmployee.merge(employee);
+        resource.saveOrUpdate(updatedEmployee);
+        return true;
+    }
+
     @DELETE
     @Path("/delete")
     public boolean delete(@QueryParam("id") int id) {

@@ -14,7 +14,10 @@ public class DBTransactionFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         Session session = SessionFactoryHolder.getSession();
         session.beginTransaction();
-        filterChain.doFilter(servletRequest, servletResponse);
-        session.getTransaction().commit();
+        try {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } finally {
+            session.getTransaction().commit();
+        }
     }
 }
