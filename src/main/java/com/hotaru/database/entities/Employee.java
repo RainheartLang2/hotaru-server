@@ -4,29 +4,39 @@ import com.hotaru.core.database.Identifiable;
 
 import javax.persistence.*;
 
-@Table(name="employee")
+@Table(name = "employee")
 @Entity(name = "employee")
 public class Employee implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="first_name")
+    @Column(name = "first_name", length = 100)
     private String firstName;
 
-    @Column(name="middle_name")
+    @Column(name = "middle_name", length = 100)
     private String middleName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name", length = 100)
     private String lastName;
 
-    @Column(name="deleted")
+    @Column(name = "deleted")
     private boolean deleted;
 
-    @Column(name="active")
+    @Column(name = "active")
     private Boolean active;
 
-    public Employee() {}
+    @Column(name = "phone", length = 15)
+    private String phone;
+
+    @Column(name = "email", length = 254)
+    private String email;
+
+    @Column(name = "address", length = 1024)
+    private String address;
+
+    public Employee() {
+    }
 
     public Employee(String firstName, String middleName, String lastName) {
         this.firstName = firstName;
@@ -82,6 +92,30 @@ public class Employee implements Identifiable {
         return active;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public void setActive(Boolean active) {
         this.active = active;
     }
@@ -98,6 +132,15 @@ public class Employee implements Identifiable {
         }
         if (employee.isActive() != null) {
             this.setActive(employee.isActive());
+        }
+        if (employee.getPhone() != null) {
+            this.setPhone(employee.getPhone());
+        }
+        if (employee.getEmail() != null) {
+            this.setPhone(employee.getEmail());
+        }
+        if (employee.getAddress() != null) {
+            this.setAddress(employee.getAddress());
         }
     }
 }
