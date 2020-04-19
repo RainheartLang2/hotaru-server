@@ -2,7 +2,10 @@ package com.hotaru.rest.services;
 
 import com.hotaru.core.exceptions.ValidationException;
 import com.hotaru.database.entities.Employee;
+import com.hotaru.database.entities.Login;
 import com.hotaru.database.resources.EmployeeResource;
+import com.hotaru.database.resources.LoginResource;
+import com.hotaru.rest.services.info.EditEmployeeInfo;
 import com.hotaru.rest.validation.forms.EmployeeValidationForm;
 
 import javax.ws.rs.*;
@@ -21,27 +24,40 @@ public class EmployeesService {
 
     @POST
     @Path("/add")
-    public int add(Employee employee) throws ValidationException {
+    public int add(EditEmployeeInfo info) throws ValidationException {
+        Employee employee = info.getEmployee();
+        Login login = info.getLogin();
+
         EmployeeValidationForm.INSTANCE.validate(employee);
         EmployeeResource.getInstance().saveOrUpdate(employee);
+        int employeeId = employee.getId();
+        login.setUserId(employeeId);
+        LoginResource.getInstance().saveOrUpdate(login);
         return employee.getId();
     }
 
     @POST
     @Path("/edit")
-    public boolean updateEmployee(Employee employee) throws ValidationException {
+    public boolean updateEmployee(EditEmployeeInfo info) throws ValidationException {
+        Employee employee = info.getEmployee();
+        Login login = info.getLogin();
+
         EmployeeResource resource = EmployeeResource.getInstance();
         Employee updatedEmployee = resource.getById(employee.getId());
         updatedEmployee.merge(employee);
         EmployeeValidationForm.INSTANCE.validate(updatedEmployee);
         resource.saveOrUpdate(updatedEmployee);
+        if (login != null) {
+            login.setUserId(employee.getId());
+            LoginResource.getInstance().saveOrUpdate(login);
+        }
         return true;
     }
 
     @DELETE
     @Path("/delete")
     public boolean delete(@QueryParam("id") int id) {
-        EmployeeResource.getInstance().delete(id);
+        EmployeeResource.getInstance().markDeleted(id);
         return true;
     }
 }

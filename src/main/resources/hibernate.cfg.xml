@@ -24,6 +24,7 @@
         <property name="hbm2ddl.auto">create-drop</property>
 
         <mapping class="com.hotaru.database.entities.Employee"/>
+        <mapping class="com.hotaru.database.entities.Login"/>
 
     </session-factory>
 </hibernate-configuration>

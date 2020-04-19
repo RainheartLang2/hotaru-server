@@ -12,7 +12,7 @@ public class PlatformServletContextListener implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent sce) {
         SessionFactoryHolder.initialize();
-        DataSourceFactory.initialize();
+//        DataSourceFactory.initialize();
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
