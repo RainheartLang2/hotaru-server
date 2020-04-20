@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JsonRpcServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     private JsonRpcMultiServer jsonRpcServer;
 
     public void init(ServletConfig config) {
         this.jsonRpcServer = new JsonRpcMultiServer(new ObjectMapper());
-        jsonRpcServer.addService("EmployeeService", new EmployeeService(), EmployeeServiceBase.class);
+        jsonRpcServer.addService("LoginService", new LoginService(), LoginServiceBase.class);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

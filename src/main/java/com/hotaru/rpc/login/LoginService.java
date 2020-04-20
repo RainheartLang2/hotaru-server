@@ -1,5 +1,6 @@
 package com.hotaru.rpc.login;
 
+import com.hotaru.core.util.CommonConstants;
 import com.hotaru.core.util.GlobalHolder;
 import com.hotaru.database.entities.Employee;
 import com.hotaru.database.entities.Login;
@@ -13,7 +14,7 @@ public class LoginService implements LoginServiceBase {
         Login loginFromBase = LoginResource.getInstance().getByLoginName(login);
         if (loginFromBase != null && loginFromBase.getPassword().equals(password)) {
             Employee employee = EmployeeResource.getInstance().getById(loginFromBase.getUserId());
-            GlobalHolder.getSession().setAttribute("loggedInUser", employee);
+            GlobalHolder.getSession().setAttribute(CommonConstants.LOGGED_IN_USER_ATTRIBUTE, employee);
         }
     }
 }

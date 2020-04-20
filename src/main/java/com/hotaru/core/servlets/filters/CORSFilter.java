@@ -19,7 +19,7 @@ public class CORSFilter implements Filter {
         response.addHeader(ALLOWED_METHODS_HEADER, "GET, POST, PUT, PATCH, DELETE, HEAD");
         response.addHeader(ALLOWED_HEADERS_HEADER, "origin, content-type, accept, authorization");
         response.addHeader(ALLOWED_CREDENTIALS_HEADER, "true");
-        response.addHeader(ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*");
+        response.addHeader(ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "http://localhost:3000");
 
         filterChain.doFilter(servletRequest, servletResponse);
    }
