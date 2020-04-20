@@ -23,8 +23,8 @@
 	</filter-mapping>
 
 	<servlet>
-		<servlet-name>jersey-serlvet</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<servlet-name>json-rpc-servlet</servlet-name>
+		<servlet-class>com.hotaru.core.servlets.JsonRpcServlet</servlet-class>
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
 			<param-value>com.hotaru.rest.services</param-value>
@@ -37,7 +37,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-name>json-rpc-servlet</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 

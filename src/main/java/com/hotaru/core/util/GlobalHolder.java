@@ -1,17 +1,23 @@
 package com.hotaru.core.util;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class GlobalHolder {
-    private static String LOCATION;
+    private static ThreadLocal<String> LOCATION = new ThreadLocal<>();
+    private static ThreadLocal<HttpSession> SESSION = new ThreadLocal<>();
 
     public static String getLocation() {
-        return LOCATION;
+        return LOCATION.get();
+    }
+    public static HttpSession getSession() {
+        return SESSION.get();
     }
 
-    public static void initialize(ServletRequest request) {
-        LOCATION = request.getScheme()
+    public static void initialize(HttpServletRequest request) {
+        LOCATION.set(request.getScheme()
                 + "://" + request.getServerName()
-                + ":" + request.getServerPort() + "/";
+                + ":" + request.getServerPort() + "/");
+        SESSION.set(request.getSession());
     }
 }
