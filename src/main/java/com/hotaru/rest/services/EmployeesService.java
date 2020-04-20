@@ -8,7 +8,9 @@ import com.hotaru.database.resources.LoginResource;
 import com.hotaru.rest.services.info.EditEmployeeInfo;
 import com.hotaru.rest.validation.forms.EmployeeValidationForm;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import java.util.List;
 
 @Path("/employees")
@@ -18,7 +20,7 @@ public class EmployeesService {
 
     @GET
     @Path("/all")
-    public List<Employee> getAll() {
+    public List<Employee> getAll(@Context HttpServletRequest request) {
         return EmployeeResource.getInstance().getAllNotDeleted();
     }
 

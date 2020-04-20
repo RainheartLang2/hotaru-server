@@ -137,7 +137,7 @@ public class Employee implements Identifiable {
             this.setPhone(employee.getPhone());
         }
         if (employee.getEmail() != null) {
-            this.setPhone(employee.getEmail());
+            this.setEmail(employee.getEmail());
         }
         if (employee.getAddress() != null) {
             this.setAddress(employee.getAddress());
