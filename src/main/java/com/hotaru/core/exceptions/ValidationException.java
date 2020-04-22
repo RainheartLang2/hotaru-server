@@ -1,6 +1,8 @@
 package com.hotaru.core.exceptions;
 
-public class ValidationException extends HotaruException {
+import com.hotaru.business.errors.ErrorType;
+
+public class ValidationException extends ServerInteractionException {
     public ValidationException() {
     }
 
@@ -18,5 +20,10 @@ public class ValidationException extends HotaruException {
 
     public ValidationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    @Override
+    public ErrorType getType() {
+        return ErrorType.VALIDATION_ERROR;
     }
 }

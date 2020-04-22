@@ -1,5 +1,7 @@
 package com.hotaru.rpc.login;
 
+import com.hotaru.core.exceptions.IncorrectCredentialsException;
+
 public interface LoginServiceBase {
-    void login(String login, String password);
+    String login(String login, String password) throws IncorrectCredentialsException;
 }
