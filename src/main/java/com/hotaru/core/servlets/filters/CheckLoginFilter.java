@@ -14,7 +14,7 @@ public class CheckLoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        if (httpRequest.getSession().getAttribute(CommonConstants.LOGGED_IN_USER_ATTRIBUTE) == null) {
+        if (httpRequest.getSession().getAttribute(CommonConstants.LOGGED_IN_EMPLOYEE) == null) {
             throw new NotActiveException();
         }
         chain.doFilter(request, response);

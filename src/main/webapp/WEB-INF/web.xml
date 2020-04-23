@@ -28,13 +28,13 @@
 
 	<servlet>
 		<servlet-name>json-rpc-servlet</servlet-name>
-		<servlet-class>com.hotaru.core.servlets.JsonRpcServlet</servlet-class>
+		<servlet-class>com.hotaru.core.servlets.UserZoneServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet>
 		<servlet-name>prelogin-servlet</servlet-name>
-		<servlet-class>com.hotaru.core.servlets.LoginServlet</servlet-class>
+		<servlet-class>com.hotaru.core.servlets.PreloginZoneServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 

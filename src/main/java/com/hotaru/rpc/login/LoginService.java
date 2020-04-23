@@ -7,6 +7,7 @@ import com.hotaru.database.entities.Employee;
 import com.hotaru.database.entities.Login;
 import com.hotaru.database.resources.EmployeeResource;
 import com.hotaru.database.resources.LoginResource;
+import com.hotaru.utils.LoggedInUserHelper;
 
 public class LoginService implements LoginServiceBase {
 
@@ -16,10 +17,15 @@ public class LoginService implements LoginServiceBase {
         Login loginFromBase = LoginResource.getInstance().getByLoginName(login);
         if (loginFromBase != null && loginFromBase.getPassword().equals(password)) {
             Employee employee = EmployeeResource.getInstance().getById(loginFromBase.getUserId());
-            GlobalHolder.getSession().setAttribute(CommonConstants.LOGGED_IN_USER_ATTRIBUTE, employee);
+            LoggedInUserHelper.setLoggedInEmployee(employee);
             return APPLICATION_REDIRECT;
         } else {
             throw new IncorrectCredentialsException();
         }
+    }
+
+    @Override
+    public void logout() {
+        LoggedInUserHelper.setLoggedInEmployee(null);
     }
 }
