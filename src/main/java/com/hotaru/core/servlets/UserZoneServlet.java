@@ -3,9 +3,7 @@ package com.hotaru.core.servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.jsonrpc4j.JsonRpcMultiServer;
 import com.hotaru.rpc.EmployeeService;
-import com.hotaru.rpc.EmployeeServiceBase;
-import com.hotaru.rpc.login.LoginService;
-import com.hotaru.rpc.login.LoginServiceBase;
+import com.hotaru.rpc.clinic.ClinicService;
 import com.hotaru.rpc.profile.UserProfileService;
 
 import javax.servlet.ServletConfig;
@@ -19,8 +17,9 @@ public class UserZoneServlet extends HttpServlet {
 
     public void init(ServletConfig config) {
         this.jsonRpcServer = new JsonRpcMultiServer(new ObjectMapper());
-        jsonRpcServer.addService("EmployeeService", new EmployeeService(), EmployeeServiceBase.class);
+        jsonRpcServer.addService("EmployeeService", new EmployeeService(), EmployeeService.class);
         jsonRpcServer.addService("UserProfileService", new UserProfileService(), UserProfileService.class);
+        jsonRpcServer.addService("ClinicService", new ClinicService(), ClinicService.class);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

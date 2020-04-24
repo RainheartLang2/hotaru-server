@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ResourceBase<E extends Identifiable> {
 
-    private Class daoClass;
+    protected Class daoClass;
     private E serviceInstance;
 
     public ResourceBase() {

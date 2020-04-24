@@ -1,23 +1,27 @@
 package com.hotaru.database.entities;
 
+import com.hotaru.core.database.Archivable;
 import com.hotaru.core.database.Identifiable;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
 @Table(name = "employee")
 @Entity(name = "employee")
-public class Employee implements Identifiable {
+public class Employee implements Identifiable, Archivable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "first_name", length = 100)
+    @NotNull
     private String firstName;
 
     @Column(name = "middle_name", length = 100)
     private String middleName;
 
     @Column(name = "last_name", length = 100)
+    @NotNull
     private String lastName;
 
     @Column(name = "deleted")

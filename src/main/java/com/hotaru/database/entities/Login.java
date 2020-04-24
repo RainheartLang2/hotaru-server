@@ -1,6 +1,7 @@
 package com.hotaru.database.entities;
 
 import com.hotaru.core.database.Identifiable;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
@@ -18,9 +19,11 @@ public class Login implements Credential, Identifiable {
     private int userId;
 
     @Column(name="login_name")
+    @NotNull
     private String loginName;
 
     @Column(name="password")
+    @NotNull
     private String password;
 
     public Login() {

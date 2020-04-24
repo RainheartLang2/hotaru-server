@@ -5,6 +5,10 @@
 	<display-name>Restful Web Application</display-name>
 
 	<filter-mapping>
+		<filter-name>requestExtractionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>exceptionCatchFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
@@ -18,11 +22,6 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>dbTransactionFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<filter-mapping>
-		<filter-name>requestExtractionFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
@@ -48,4 +47,7 @@
 		<url-pattern>/login/*</url-pattern>
 	</servlet-mapping>
 
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
 </web-app>
