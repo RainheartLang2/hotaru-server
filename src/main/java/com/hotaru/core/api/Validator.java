@@ -5,6 +5,8 @@ import com.hotaru.core.exceptions.ValidationException;
 public abstract class Validator<ValueType> {
     protected String message;
 
+    protected Validator() {};
+
     public Validator(String message) {
         this.message = message;
     }

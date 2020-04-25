@@ -23,7 +23,7 @@ public class EmployeeService implements EmployeeServiceBase {
         int employeeId = employee.getId();
         login.setUserId(employeeId);
         LoginResource.getInstance().saveOrUpdate(login);
-        return employee.getId();
+        return employeeId;
     }
 
     public void update(Employee employee, Login login) throws ValidationException {

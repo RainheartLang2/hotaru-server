@@ -18,6 +18,15 @@ public class Clinic implements Identifiable, Archivable {
     @NotNull
     private String name;
 
+    @Column(name = "phone", length = 15)
+    private String phone;
+
+    @Column(name = "email", length = 254)
+    private String email;
+
+    @Column(name = "siteUrl", length = 256)
+    private String siteUrl;
+
     @Column(name = "address", length = 1024)
     private String address;
 
@@ -80,5 +89,29 @@ public class Clinic implements Identifiable, Archivable {
 
     public void setTimeZone(TimeZone timeZone) {
         this.timeZone = timeZone;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSiteUrl() {
+        return siteUrl;
+    }
+
+    public void setSiteUrl(String siteUrl) {
+        this.siteUrl = siteUrl;
     }
 }
