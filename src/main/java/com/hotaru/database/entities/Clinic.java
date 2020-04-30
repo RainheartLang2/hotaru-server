@@ -27,6 +27,9 @@ public class Clinic implements Identifiable, Archivable {
     @Column(name = "siteUrl", length = 256)
     private String siteUrl;
 
+    @Column(name = "city", length = 100)
+    private String city;
+
     @Column(name = "address", length = 1024)
     private String address;
 
@@ -113,5 +116,13 @@ public class Clinic implements Identifiable, Archivable {
 
     public void setSiteUrl(String siteUrl) {
         this.siteUrl = siteUrl;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

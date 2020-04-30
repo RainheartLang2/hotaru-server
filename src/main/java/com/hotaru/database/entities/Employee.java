@@ -39,6 +39,9 @@ public class Employee implements Identifiable, Archivable {
     @Column(name = "address", length = 1024)
     private String address;
 
+    @Column(name = "clinicId")
+    private Integer clinicId;
+
     public Employee() {
     }
 
@@ -124,6 +127,14 @@ public class Employee implements Identifiable, Archivable {
         this.active = active;
     }
 
+    public Integer getClinicId() {
+        return clinicId;
+    }
+
+    public void setClinicId(Integer clinicId) {
+        this.clinicId = clinicId;
+    }
+
     public void merge(Employee employee) {
         if (employee.getFirstName() != null) {
             this.setFirstName(employee.getFirstName());
@@ -145,6 +156,10 @@ public class Employee implements Identifiable, Archivable {
         }
         if (employee.getAddress() != null) {
             this.setAddress(employee.getAddress());
+        }
+
+        if (employee.getClinicId() != null) {
+            this.setClinicId(employee.getClinicId());
         }
     }
 }
