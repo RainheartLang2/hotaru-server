@@ -5,6 +5,7 @@ import com.googlecode.jsonrpc4j.JsonRpcMultiServer;
 import com.hotaru.rpc.EmployeeService;
 import com.hotaru.rpc.clinic.ClinicService;
 import com.hotaru.rpc.profile.UserProfileService;
+import com.hotaru.rpc.species.SpeciesService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +21,7 @@ public class UserZoneServlet extends HttpServlet {
         jsonRpcServer.addService("EmployeeService", new EmployeeService(), EmployeeService.class);
         jsonRpcServer.addService("UserProfileService", new UserProfileService(), UserProfileService.class);
         jsonRpcServer.addService("ClinicService", new ClinicService(), ClinicService.class);
+        jsonRpcServer.addService("SpeciesService", new SpeciesService(), SpeciesService.class);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
