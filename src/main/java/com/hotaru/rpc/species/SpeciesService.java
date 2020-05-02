@@ -12,15 +12,15 @@ public class SpeciesService {
         return SpeciesResource.getInstance().getAllNotDeleted();
     }
 
-    public int add(Species clinic) throws ValidationException {
-        SpeciesValidationForm.INSTANCE.validate(clinic);
-        SpeciesResource.getInstance().saveOrUpdate(clinic);
-        return clinic.getId();
+    public int add(Species species) throws ValidationException {
+        SpeciesValidationForm.INSTANCE.validate(species);
+        SpeciesResource.getInstance().saveOrUpdate(species);
+        return species.getId();
     }
 
-    public void update(Species clinic) throws ValidationException {
-        SpeciesValidationForm.INSTANCE.validate(clinic);
-        SpeciesResource.getInstance().saveOrUpdate(clinic);
+    public void update(Species species) throws ValidationException {
+        SpeciesValidationForm.INSTANCE.validate(species);
+        SpeciesResource.getInstance().saveOrUpdate(species);
     }
 
     public void delete(int id) {

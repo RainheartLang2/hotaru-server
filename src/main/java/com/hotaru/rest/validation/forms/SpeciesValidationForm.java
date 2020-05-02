@@ -16,8 +16,8 @@ public class SpeciesValidationForm extends ValidationForm<Species> {
     @Override
     public void validate(Species value) throws ValidationException {
         validateField(value.getName(),
-                new RequiredFieldStringValidator("Field 'firstName' not allowed to be empty"),
-                new MaximalLengthValidator("Field 'firstName' not allowed to be longer than 100 characters", 200)
+                new RequiredFieldStringValidator("Field 'name' not allowed to be empty"),
+                new MaximalLengthValidator("Field 'name' not allowed to be longer than 100 characters", 200)
         );
     }
 }

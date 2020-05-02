@@ -26,6 +26,7 @@
         <mapping class="com.hotaru.database.entities.Employee"/>
         <mapping class="com.hotaru.database.entities.Login"/>
         <mapping class="com.hotaru.database.entities.Clinic"/>
+        <mapping class="com.hotaru.database.entities.Species"/>
 
     </session-factory>
 </hibernate-configuration>
