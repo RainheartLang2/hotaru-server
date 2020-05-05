@@ -4,7 +4,9 @@ import com.hotaru.core.database.Identifiable;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity(name="appointment")
 @Table(name="appointment")
@@ -20,11 +22,11 @@ public class Appointment implements Identifiable {
 
     @Column(name = "startDate")
     @NotNull
-    private LocalDateTime startDate;
+    private Date startDate;
 
-    @Column(name = "startDate")
+    @Column(name = "endDate")
     @NotNull
-    private LocalDateTime endDate;
+    private Date endDate;
 
     public Appointment() {
     }
@@ -47,19 +49,19 @@ public class Appointment implements Identifiable {
         this.title = title;
     }
 
-    public LocalDateTime getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 }
