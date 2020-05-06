@@ -27,7 +27,7 @@ public class UserZoneServlet extends HttpServlet {
         jsonRpcServer.addService("SpeciesService", new SpeciesService(), SpeciesService.class);
         jsonRpcServer.addService("BreedService", new BreedService(), BreedService.class);
         jsonRpcServer.addService("AppointmentService", new AppointmentService(), AppointmentService.class);
-        jsonRpcServer.addService("ClientService", new ClinicService(), ClientService.class);
+        jsonRpcServer.addService("ClientService", new ClientService(), ClientService.class);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
