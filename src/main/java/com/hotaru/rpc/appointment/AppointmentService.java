@@ -1,9 +1,12 @@
 package com.hotaru.rpc.appointment;
 
+import com.hotaru.business.logic.enums.ClientType;
 import com.hotaru.core.entities.DateRange;
 import com.hotaru.core.exceptions.ValidationException;
 import com.hotaru.database.entities.Appointment;
+import com.hotaru.database.entities.Client;
 import com.hotaru.database.resources.AppointmentResource;
+import com.hotaru.database.resources.ClientInfoResource;
 import com.hotaru.rest.validation.forms.AppointmentValidationForm;
 import com.hotaru.rest.validation.forms.DateRangeValidationForm;
 
@@ -15,14 +18,26 @@ public class AppointmentService {
         return AppointmentResource.getInstance().getAll();
     }
 
-    public int add(Appointment appointment) throws ValidationException {
+    public Appointment add(Appointment appointment, Client client) throws ValidationException {
         AppointmentValidationForm.INSTANCE.validate(appointment);
+        if (appointment.getClientId() == null) {
+            //TODO: add validation
+            client.setType(ClientType.TEMPORARY);
+            ClientInfoResource.getInstance().saveOrUpdate(client);
+            appointment.setClientId(client.getId());
+        } else if (client != null) {
+            throw new ValidationException("there should not be clientinfo if client id specified");
+        }
         AppointmentResource.getInstance().saveOrUpdate(appointment);
-        return appointment.getId();
+        return appointment;
     }
 
-    public void update(Appointment appointment) throws ValidationException {
+    public void update(Appointment appointment, Client client) throws ValidationException {
         AppointmentValidationForm.INSTANCE.validate(appointment);
+        //TODO: add validation
+        if (client != null) {
+            ClientInfoResource.getInstance().saveOrUpdate(client);
+        }
         AppointmentResource.getInstance().saveOrUpdate(appointment);
     }
 

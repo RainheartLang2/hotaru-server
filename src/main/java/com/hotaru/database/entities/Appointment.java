@@ -4,8 +4,6 @@ import com.hotaru.core.database.Identifiable;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity(name="appointment")
@@ -27,6 +25,10 @@ public class Appointment implements Identifiable {
     @Column(name = "endDate")
     @NotNull
     private Date endDate;
+
+    @Column(name = "clientId")
+    @NotNull
+    private Integer clientId;
 
     public Appointment() {
     }
@@ -63,5 +65,13 @@ public class Appointment implements Identifiable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Integer getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Integer clientInfoId) {
+        this.clientId = clientInfoId;
     }
 }

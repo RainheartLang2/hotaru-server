@@ -29,5 +29,6 @@
         <mapping class="com.hotaru.database.entities.Species"/>
         <mapping class="com.hotaru.database.entities.Breed"/>
         <mapping class="com.hotaru.database.entities.Appointment"/>
+        <mapping class="com.hotaru.database.entities.Client"/>
     </session-factory>
 </hibernate-configuration>

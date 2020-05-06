@@ -1,9 +1,11 @@
 package com.hotaru.core.database;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
 import java.util.List;
 
 public class ResourceBase<E extends Identifiable> {
@@ -27,6 +29,13 @@ public class ResourceBase<E extends Identifiable> {
 
     public List<E> getAll() {
         return getSession().createCriteria(daoClass).list();
+    }
+
+    public List<E> getByIds(Collection<Integer> ids) {
+        return getSession().
+                createCriteria(daoClass)
+                .add(Restrictions.in("id", ids))
+                .list();
     }
 
     public void saveOrUpdate(E dao) {
