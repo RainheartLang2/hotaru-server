@@ -30,5 +30,6 @@
         <mapping class="com.hotaru.database.entities.Breed"/>
         <mapping class="com.hotaru.database.entities.Appointment"/>
         <mapping class="com.hotaru.database.entities.Client"/>
+        <mapping class="com.hotaru.database.entities.Pet"/>
     </session-factory>
 </hibernate-configuration>
