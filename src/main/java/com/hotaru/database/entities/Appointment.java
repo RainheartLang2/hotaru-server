@@ -30,6 +30,10 @@ public class Appointment implements Identifiable {
     @NotNull
     private Integer clientId;
 
+    @Column(name = "medicId")
+    @NotNull
+    private int medicId;
+
     public Appointment() {
     }
 
@@ -73,5 +77,13 @@ public class Appointment implements Identifiable {
 
     public void setClientId(Integer clientInfoId) {
         this.clientId = clientInfoId;
+    }
+
+    public int getMedicId() {
+        return medicId;
+    }
+
+    public void setMedicId(int medicId) {
+        this.medicId = medicId;
     }
 }

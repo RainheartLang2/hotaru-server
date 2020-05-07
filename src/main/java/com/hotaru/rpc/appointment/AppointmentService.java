@@ -20,14 +20,13 @@ public class AppointmentService {
 
     public Appointment add(Appointment appointment, Client client) throws ValidationException {
         AppointmentValidationForm.INSTANCE.validate(appointment);
-        if (appointment.getClientId() == null) {
+        if (client != null) {
             //TODO: add validation
             client.setType(ClientType.TEMPORARY);
             ClientInfoResource.getInstance().saveOrUpdate(client);
             appointment.setClientId(client.getId());
-        } else if (client != null) {
-            throw new ValidationException("there should not be clientinfo if client id specified");
         }
+
         AppointmentResource.getInstance().saveOrUpdate(appointment);
         return appointment;
     }
@@ -35,6 +34,11 @@ public class AppointmentService {
     public void update(Appointment appointment, Client client) throws ValidationException {
         AppointmentValidationForm.INSTANCE.validate(appointment);
         //TODO: add validation
+        if (appointment.getClientId() == null && client != null) {
+            //TODO: is client really always will be temporary here?
+            client.setType(ClientType.TEMPORARY);
+            appointment.setClientId(client.getId());
+        }
         if (client != null) {
             ClientInfoResource.getInstance().saveOrUpdate(client);
         }
