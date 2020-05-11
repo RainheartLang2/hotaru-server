@@ -5,6 +5,7 @@ import com.hotaru.utils.LoggedInUserHelper;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.NotActiveException;
 
@@ -15,8 +16,10 @@ public class CheckLoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         Employee employee = LoggedInUserHelper.getLoggedInEmployee();
         if (employee == null || !employee.isActive() || employee.isDeleted()) {
-            throw new NotActiveException();
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } else {
+            chain.doFilter(request, response);
         }
-        chain.doFilter(request, response);
     }
 }
