@@ -18,6 +18,10 @@ public class Clinic implements Identifiable, Archivable {
     @NotNull
     private String name;
 
+    @Column(name = "logo")
+    @Lob
+    private String logo;
+
     @Column(name = "phone", length = 15)
     private String phone;
 
@@ -124,5 +128,13 @@ public class Clinic implements Identifiable, Archivable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 }

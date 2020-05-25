@@ -11,6 +11,6 @@ public class OnlyDigitsValidator extends Validator<String> {
     private static String pattern = "^\\d*$";
     @Override
     protected boolean innerValidate(String value) {
-        return value.matches(pattern);
+        return value == null || value.matches(pattern);
     }
 }

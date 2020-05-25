@@ -12,6 +12,6 @@ public class MaximalLengthValidator extends Validator<String> {
 
     @Override
     protected boolean innerValidate(String value) {
-        return value.length() <= this.length;
+        return value == null || value.length() <= this.length;
     }
 }

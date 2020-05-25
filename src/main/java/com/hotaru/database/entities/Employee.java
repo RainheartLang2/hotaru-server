@@ -42,6 +42,10 @@ public class Employee implements Identifiable, Archivable {
     @Column(name = "clinicId")
     private Integer clinicId;
 
+    @Column(name = "photo")
+    @Lob
+    private String photo;
+
     public Employee() {
     }
 
@@ -133,6 +137,14 @@ public class Employee implements Identifiable, Archivable {
 
     public void setClinicId(Integer clinicId) {
         this.clinicId = clinicId;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public void merge(Employee employee) {
