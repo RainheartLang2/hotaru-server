@@ -1,12 +1,15 @@
 package com.hotaru.rpc.client;
 
-import com.hotaru.database.entities.Pet;
+import com.hotaru.business.managers.PetManager;
+import com.hotaru.core.exceptions.ValidationException;
 import com.hotaru.database.entities.Client;
-import com.hotaru.database.resources.PetResource;
+import com.hotaru.database.entities.Clinic;
+import com.hotaru.database.entities.Pet;
 import com.hotaru.database.resources.ClientInfoResource;
+import com.hotaru.database.resources.ClinicResource;
+import com.hotaru.rest.validation.forms.ClinicValidationForm;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ClientService {
 
@@ -38,11 +41,26 @@ public class ClientService {
 
     public ClientInfo getAll(Integer... ids) {
         List<Client> clients = ClientInfoResource.getInstance().getByIds(List.of(ids));
-        List<Pet> pets = PetResource
-                .getInstance()
-                .getByOwnerIds(clients.stream()
-                                .map(client -> client.getId())
-                                .collect(Collectors.toList()));
+        List<Pet> pets = PetManager.getInstance().getListByClients(clients);
         return new ClientInfo(clients, pets);
+    }
+
+    public ClientInfo getAllPermanent() {
+        List<Client> clients = ClientInfoResource.getInstance().getAllPermanent();
+        List<Pet> pets = PetManager.getInstance().getListByClients(clients);
+        return new ClientInfo(clients, pets);
+    }
+
+    public int add(Client client) throws ValidationException {
+        ClientInfoResource.getInstance().saveOrUpdate(client);
+        return client.getId();
+    }
+
+    public void update(Client client) throws ValidationException {
+        ClientInfoResource.getInstance().saveOrUpdate(client);
+    }
+
+    public void delete(int id) {
+        ClientInfoResource.getInstance().markDeleted(id);
     }
 }

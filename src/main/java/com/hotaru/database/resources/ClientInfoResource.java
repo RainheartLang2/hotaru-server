@@ -1,7 +1,11 @@
 package com.hotaru.database.resources;
 
+import com.hotaru.business.logic.enums.ClientType;
 import com.hotaru.core.database.ArchivableResourceBase;
 import com.hotaru.database.entities.Client;
+import org.hibernate.criterion.Restrictions;
+
+import java.util.List;
 
 public class ClientInfoResource extends ArchivableResourceBase<Client> {
 
@@ -12,6 +16,13 @@ public class ClientInfoResource extends ArchivableResourceBase<Client> {
             INSTANCE = new ClientInfoResource();
         }
         return INSTANCE;
+    }
+
+    public List<Client> getAllPermanent() {
+        return getSession().
+                createCriteria(daoClass)
+                .add(Restrictions.eq("type", ClientType.PERMANENT))
+                .list();
     }
 
     private ClientInfoResource() {
