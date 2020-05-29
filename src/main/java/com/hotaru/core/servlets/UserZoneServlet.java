@@ -7,6 +7,7 @@ import com.hotaru.rpc.appointment.AppointmentService;
 import com.hotaru.rpc.breed.BreedService;
 import com.hotaru.rpc.client.ClientService;
 import com.hotaru.rpc.clinic.ClinicService;
+import com.hotaru.rpc.measure.MeasureService;
 import com.hotaru.rpc.profile.UserProfileService;
 import com.hotaru.rpc.species.SpeciesService;
 
@@ -28,6 +29,7 @@ public class UserZoneServlet extends HttpServlet {
         jsonRpcServer.addService("BreedService", new BreedService(), BreedService.class);
         jsonRpcServer.addService("AppointmentService", new AppointmentService(), AppointmentService.class);
         jsonRpcServer.addService("ClientService", new ClientService(), ClientService.class);
+        jsonRpcServer.addService("MeasureService", new MeasureService(), MeasureService.class);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

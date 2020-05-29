@@ -24,7 +24,6 @@ public class AppointmentService {
         AppointmentValidationForm.INSTANCE.validate(appointment);
         if (client != null) {
             //TODO: add validation
-            client.setType(ClientType.TEMPORARY);
             ClientInfoResource.getInstance().saveOrUpdate(client);
             appointment.setClientId(client.getId());
             if (pet != null) {
@@ -41,8 +40,6 @@ public class AppointmentService {
         AppointmentValidationForm.INSTANCE.validate(appointment);
         //TODO: add validation
         if (appointment.getClientId() == null && client != null) {
-            //TODO: is client really always will be temporary here?
-            client.setType(ClientType.TEMPORARY);
             appointment.setClientId(client.getId());
         }
         if (client != null) {

@@ -6,8 +6,6 @@ import com.hotaru.database.entities.Client;
 import com.hotaru.database.entities.Clinic;
 import com.hotaru.database.entities.Pet;
 import com.hotaru.database.resources.ClientInfoResource;
-import com.hotaru.database.resources.ClinicResource;
-import com.hotaru.rest.validation.forms.ClinicValidationForm;
 
 import java.util.List;
 
