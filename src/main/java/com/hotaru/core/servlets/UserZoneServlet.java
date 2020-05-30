@@ -2,6 +2,7 @@ package com.hotaru.core.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.jsonrpc4j.JsonRpcMultiServer;
+import com.hotaru.database.entities.VisitPurpose;
 import com.hotaru.rpc.EmployeeService;
 import com.hotaru.rpc.appointment.AppointmentService;
 import com.hotaru.rpc.breed.BreedService;
@@ -11,6 +12,7 @@ import com.hotaru.rpc.diagnosis.DiagnosisService;
 import com.hotaru.rpc.measure.MeasureService;
 import com.hotaru.rpc.profile.UserProfileService;
 import com.hotaru.rpc.species.SpeciesService;
+import com.hotaru.rpc.visitPurpose.VisitPurposeService;
 import com.hotaru.rpc.visitResult.VisitResultService;
 
 import javax.servlet.ServletConfig;
@@ -33,6 +35,7 @@ public class UserZoneServlet extends HttpServlet {
         jsonRpcServer.addService("ClientService", new ClientService(), ClientService.class);
         jsonRpcServer.addService("MeasureService", new MeasureService(), MeasureService.class);
         jsonRpcServer.addService("VisitResultService", new VisitResultService(), VisitResultService.class);
+        jsonRpcServer.addService("VisitPurposeService", new VisitPurposeService(), VisitPurposeService.class);
         jsonRpcServer.addService("DiagnosisService", new DiagnosisService(), DiagnosisService.class);
     }
 
