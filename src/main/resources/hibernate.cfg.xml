@@ -11,7 +11,7 @@
         <property name="hibernate.connection.username">K35CvVDRsg</property>
         <property name="hibernate.connection.password">dh04f46jjq</property>
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="hibernate.connection.pool_size">10</property>
+        <property name="hibernate.connection.pool_size">5</property>
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <!-- SQL dialect -->
@@ -33,5 +33,6 @@
         <mapping class="com.hotaru.database.entities.Pet"/>
         <mapping class="com.hotaru.database.entities.Measure"/>
         <mapping class="com.hotaru.database.entities.VisitResult"/>
+        <mapping class="com.hotaru.database.entities.Diagnosis"/>
     </session-factory>
 </hibernate-configuration>

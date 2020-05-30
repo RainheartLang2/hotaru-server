@@ -10,13 +10,13 @@ public class VisitResultService {
         return VisitResultResource.getInstance().getAllNotDeleted();
     }
 
-    public int add(VisitResult species) {
-        VisitResultResource.getInstance().saveOrUpdate(species);
-        return species.getId();
+    public int add(VisitResult visitResult) {
+        VisitResultResource.getInstance().saveOrUpdate(visitResult);
+        return visitResult.getId();
     }
 
-    public void update(VisitResult species) {
-        VisitResultResource.getInstance().saveOrUpdate(species);
+    public void update(VisitResult visitResult) {
+        VisitResultResource.getInstance().saveOrUpdate(visitResult);
     }
 
     public void delete(int id) {

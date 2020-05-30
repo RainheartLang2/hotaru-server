@@ -10,13 +10,13 @@ public class MeasureService {
         return MeasureResource.getInstance().getAllNotDeleted();
     }
 
-    public int add(Measure species) {
-        MeasureResource.getInstance().saveOrUpdate(species);
-        return species.getId();
+    public int add(Measure measureUnit) {
+        MeasureResource.getInstance().saveOrUpdate(measureUnit);
+        return measureUnit.getId();
     }
 
-    public void update(Measure species) {
-        MeasureResource.getInstance().saveOrUpdate(species);
+    public void update(Measure measureUnit) {
+        MeasureResource.getInstance().saveOrUpdate(measureUnit);
     }
 
     public void delete(int id) {
