@@ -35,5 +35,6 @@
         <mapping class="com.hotaru.database.entities.VisitResult"/>
         <mapping class="com.hotaru.database.entities.VisitPurpose"/>
         <mapping class="com.hotaru.database.entities.Diagnosis"/>
+        <mapping class="com.hotaru.database.entities.AnimalColor"/>
     </session-factory>
 </hibernate-configuration>
