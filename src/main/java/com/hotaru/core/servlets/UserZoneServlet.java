@@ -2,13 +2,13 @@ package com.hotaru.core.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.jsonrpc4j.JsonRpcMultiServer;
-import com.hotaru.database.entities.VisitPurpose;
 import com.hotaru.rpc.EmployeeService;
 import com.hotaru.rpc.animalColor.AnimalColorService;
 import com.hotaru.rpc.appointment.AppointmentService;
 import com.hotaru.rpc.breed.BreedService;
 import com.hotaru.rpc.client.ClientService;
 import com.hotaru.rpc.clinic.ClinicService;
+import com.hotaru.rpc.clinicWorkSchedule.ClinicWorkScheduleService;
 import com.hotaru.rpc.diagnosis.DiagnosisService;
 import com.hotaru.rpc.measure.MeasureService;
 import com.hotaru.rpc.profile.UserProfileService;
@@ -39,6 +39,7 @@ public class UserZoneServlet extends HttpServlet {
         jsonRpcServer.addService("VisitPurposeService", new VisitPurposeService(), VisitPurposeService.class);
         jsonRpcServer.addService("DiagnosisService", new DiagnosisService(), DiagnosisService.class);
         jsonRpcServer.addService("AnimalColorService", new AnimalColorService(), AnimalColorService.class);
+        jsonRpcServer.addService("ClinicWorkScheduleService", new ClinicWorkScheduleService(), ClinicWorkScheduleService.class);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
