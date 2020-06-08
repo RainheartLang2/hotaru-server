@@ -12,9 +12,21 @@ public class ClinicWorkScheduleService {
         return ClinicWorkScheduleResource.getInstance().getAll();
     }
 
-    public void update(int id, int dayNumber, List<TimeRange> records) {
+    public void setUseDefaultFlag(int clinicId, boolean useDefault) {
         ClinicWorkScheduleResource resource = ClinicWorkScheduleResource.getInstance();
-        ClinicWorkSchedule schedule = resource.getById(id);
+        ClinicWorkSchedule schedule = resource.getByClinicId(clinicId);
+        schedule.setUsesDefault(useDefault);
+        resource.saveOrUpdate(schedule);
+    }
+
+    public void update(int clinicId, int dayNumber, List<TimeRange> records) {
+        ClinicWorkScheduleResource resource = ClinicWorkScheduleResource.getInstance();
+        ClinicWorkSchedule schedule;
+        if (clinicId == 0) {
+            schedule = resource.getDefaultSchedule();
+        } else {
+            schedule = resource.getByClinicId(clinicId);
+        }
         schedule.getSchedule().setDaySchedule(dayNumber, new DaySchedule(records));
         resource.saveOrUpdate(schedule);
     }

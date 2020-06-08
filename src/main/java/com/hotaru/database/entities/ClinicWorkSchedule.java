@@ -3,6 +3,7 @@ package com.hotaru.database.entities;
 import com.hotaru.core.database.Identifiable;
 import com.hotaru.core.entities.WorkSchedule;
 import com.hotaru.database.converters.DataBaseJsonConverter;
+import com.hotaru.database.converters.WorkScheduleJsonConverter;
 
 import javax.persistence.*;
 
@@ -17,23 +18,23 @@ public class ClinicWorkSchedule implements Identifiable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="clinicId")
+    @Column(name="clinicId", unique=true)
     private Integer clinicId;
 
     @Column(name="isDefault")
-    private boolean _default;
+    private boolean defaultSchedule;
 
     @Column(name="usesDefault")
     private boolean usesDefault;
 
 
     @Column(name="workSchedule")
-    @Convert(converter = DataBaseJsonConverter.class)
+    @Convert(converter = WorkScheduleJsonConverter.class)
     private WorkSchedule schedule;
 
     public ClinicWorkSchedule(Integer clinicId, boolean _default, boolean usesDefault, WorkSchedule schedule) {
         this.clinicId = clinicId;
-        this._default = _default;
+        this.defaultSchedule = _default;
         this.usesDefault = usesDefault;
         this.schedule = schedule;
     }
@@ -47,8 +48,8 @@ public class ClinicWorkSchedule implements Identifiable {
         return clinicId;
     }
 
-    public boolean is_default() {
-        return _default;
+    public boolean isDefaultSchedule() {
+        return defaultSchedule;
     }
 
     public boolean isUsesDefault() {
@@ -68,8 +69,8 @@ public class ClinicWorkSchedule implements Identifiable {
         this.clinicId = clinicId;
     }
 
-    public void set_default(boolean _default) {
-        this._default = _default;
+    public void setDefaultSchedule(boolean _default) {
+        this.defaultSchedule = _default;
     }
 
     public void setUsesDefault(boolean usesDefault) {

@@ -1,12 +1,15 @@
 package com.hotaru.core.entities;
 
+import java.util.List;
 import java.util.Map;
 
 public class WorkSchedule {
     private int length;
-    private Map<Integer, DaySchedule> schedule;
+    private List<DaySchedule> schedule;
 
-    public WorkSchedule(int length, Map<Integer, DaySchedule> schedule) {
+    public WorkSchedule() {}
+
+    public WorkSchedule(int length, List<DaySchedule> schedule) {
         this.length = length;
         this.schedule = schedule;
     }
@@ -15,8 +18,16 @@ public class WorkSchedule {
         return length;
     }
 
-    public Map<Integer, DaySchedule> getSchedule() {
+    public List<DaySchedule> getSchedule() {
         return schedule;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public void setSchedule(List<DaySchedule> schedule) {
+        this.schedule = schedule;
     }
 
     public DaySchedule getDaySchedule(int dayNumber) {
@@ -24,6 +35,6 @@ public class WorkSchedule {
     }
 
     public void setDaySchedule(int dayNumber, DaySchedule daySchedule) {
-        schedule.put(dayNumber, daySchedule);
+        schedule.add(dayNumber, daySchedule);
     }
 }

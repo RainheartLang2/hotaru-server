@@ -1,8 +1,11 @@
 package com.hotaru.rpc.clinic;
 
+import com.hotaru.business.managers.ClinicManager;
 import com.hotaru.core.exceptions.ValidationException;
 import com.hotaru.database.entities.Clinic;
+import com.hotaru.database.entities.ClinicWorkSchedule;
 import com.hotaru.database.resources.ClinicResource;
+import com.hotaru.database.resources.ClinicWorkScheduleResource;
 import com.hotaru.rest.validation.forms.ClinicValidationForm;
 
 import java.util.List;
@@ -16,7 +19,7 @@ public class ClinicService implements ClinicServiceBase {
     @Override
     public int add(Clinic clinic) throws ValidationException {
         ClinicValidationForm.INSTANCE.validate(clinic);
-        ClinicResource.getInstance().saveOrUpdate(clinic);
+        ClinicManager.getInstance().addClinic(clinic);
         return clinic.getId();
     }
 

@@ -9,7 +9,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.lang.reflect.ParameterizedType;
 
-public class DataBaseJsonConverter<Type> implements AttributeConverter<Type, String> {
+public abstract class DataBaseJsonConverter<Type> implements AttributeConverter<Type, String> {
 
     @Override
     public String convertToDatabaseColumn(Type type) {
@@ -25,15 +25,18 @@ public class DataBaseJsonConverter<Type> implements AttributeConverter<Type, Str
 
     @Override
     public Type convertToEntityAttribute(String s) {
+        if (s == null) {
+            return null;
+        }
         StringReader reader = new StringReader(s);
-        Class<Type> cl = ((Class) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0]);
 
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(reader, cl);
+            return mapper.readValue(reader, getEntityClass());
         } catch (IOException e) {
             return null;
         }
     }
+
+    protected abstract Class<Type> getEntityClass();
 }
