@@ -24,7 +24,7 @@ public class ClinicWorkScheduleResource extends ResourceBase<ClinicWorkSchedule>
     public ClinicWorkSchedule getDefaultSchedule() {
         return (ClinicWorkSchedule) getSession()
                 .createCriteria(ClinicWorkSchedule.class)
-                .add(Restrictions.eq("isDefault", true))
+                .add(Restrictions.eq("defaultSchedule", true))
                 .uniqueResult();
     }
 

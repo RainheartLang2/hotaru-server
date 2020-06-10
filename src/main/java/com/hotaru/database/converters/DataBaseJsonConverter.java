@@ -1,13 +1,11 @@
 package com.hotaru.database.converters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hotaru.core.entities.WorkSchedule;
 
 import javax.persistence.AttributeConverter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.lang.reflect.ParameterizedType;
 
 public abstract class DataBaseJsonConverter<Type> implements AttributeConverter<Type, String> {
 

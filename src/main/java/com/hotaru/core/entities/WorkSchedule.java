@@ -1,7 +1,6 @@
 package com.hotaru.core.entities;
 
 import java.util.List;
-import java.util.Map;
 
 public class WorkSchedule {
     private int length;
@@ -35,6 +34,6 @@ public class WorkSchedule {
     }
 
     public void setDaySchedule(int dayNumber, DaySchedule daySchedule) {
-        schedule.add(dayNumber, daySchedule);
+        schedule.set(dayNumber, daySchedule);
     }
 }
