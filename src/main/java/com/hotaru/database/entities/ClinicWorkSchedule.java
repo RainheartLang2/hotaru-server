@@ -2,7 +2,6 @@ package com.hotaru.database.entities;
 
 import com.hotaru.core.database.Identifiable;
 import com.hotaru.core.entities.WorkSchedule;
-import com.hotaru.database.converters.DataBaseJsonConverter;
 import com.hotaru.database.converters.WorkScheduleJsonConverter;
 
 import javax.persistence.*;

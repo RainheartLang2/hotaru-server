@@ -28,7 +28,6 @@ public class ClinicWorkScheduleResource extends ResourceBase<ClinicWorkSchedule>
                 .uniqueResult();
     }
 
-
     private ClinicWorkScheduleResource() {
         super();
     }
