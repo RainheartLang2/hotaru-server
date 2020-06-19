@@ -1,5 +1,6 @@
 package com.hotaru.database.resources;
 
+import com.hotaru.business.logic.enums.DeviationType;
 import com.hotaru.core.database.ResourceBase;
 import com.hotaru.database.entities.WorkScheduleDeviationContainer;
 import org.hibernate.criterion.Restrictions;
@@ -16,10 +17,11 @@ public class WorkScheduleDeviationResource extends ResourceBase<WorkScheduleDevi
         return INSTANCE;
     }
 
-    public List<WorkScheduleDeviationContainer> getByWorkScheduleId(List<Integer> workScheduleIds) {
+    public List<WorkScheduleDeviationContainer> getByWorkScheduleId(DeviationType type, List<Integer> workScheduleIds) {
         return getSession().
                 createCriteria(WorkScheduleDeviationContainer.class)
                 .add(Restrictions.in("workScheduleId", workScheduleIds))
+                .add(Restrictions.eq("type", type))
                 .list();
     }
 

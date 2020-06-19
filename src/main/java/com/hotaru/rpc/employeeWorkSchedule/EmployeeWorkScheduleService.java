@@ -1,5 +1,6 @@
 package com.hotaru.rpc.employeeWorkSchedule;
 
+import com.hotaru.business.logic.enums.DeviationType;
 import com.hotaru.business.managers.EmployeeManager;
 import com.hotaru.business.managers.WorkScheduleManager;
 import com.hotaru.core.entities.DaySchedule;
@@ -7,18 +8,22 @@ import com.hotaru.core.entities.TimeRange;
 import com.hotaru.core.entities.WorkSchedule;
 import com.hotaru.core.util.CollectionUtils;
 import com.hotaru.database.entities.EmployeeWorkSchedule;
+import com.hotaru.database.entities.WorkScheduleDeviationContainer;
 import com.hotaru.database.resources.EmployeeWorkScheduleResource;
+import com.hotaru.database.resources.WorkScheduleDeviationResource;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmployeeWorkScheduleService {
-
-    private static DaySchedule DEFAULT_DAY_SCHEDULE = new DaySchedule();
-
     public EmployeeScheduleInfo getAll() {
         List<EmployeeWorkSchedule> workSchedules = EmployeeWorkScheduleResource.getInstance().getAll();
-        return new EmployeeScheduleInfo(workSchedules);
+        List<Integer> workScheduleIds = workSchedules.stream().map(schedule -> schedule.getId()).collect(Collectors.toList());
+        workScheduleIds.add(null);
+        List<WorkScheduleDeviationContainer> deviations = WorkScheduleDeviationResource.getInstance().getByWorkScheduleId(DeviationType.Clinic, workScheduleIds);
+
+        return new EmployeeScheduleInfo(workSchedules, deviations);
     }
 
     public void setUseDefaultFlag(int employeeId, boolean useDefault) {

@@ -1,5 +1,6 @@
 package com.hotaru.rpc.clinicWorkSchedule;
 
+import com.hotaru.business.logic.enums.DeviationType;
 import com.hotaru.business.managers.WorkScheduleManager;
 import com.hotaru.core.entities.DaySchedule;
 import com.hotaru.core.entities.TimeRange;
@@ -19,7 +20,7 @@ public class ClinicWorkScheduleService {
         List<ClinicWorkSchedule> workSchedules = ClinicWorkScheduleResource.getInstance().getAll();
         List<Integer> workScheduleIds = workSchedules.stream().map(schedule -> schedule.getId()).collect(Collectors.toList());
         workScheduleIds.add(null);
-        List<WorkScheduleDeviationContainer> deviations = WorkScheduleDeviationResource.getInstance().getByWorkScheduleId(workScheduleIds);
+        List<WorkScheduleDeviationContainer> deviations = WorkScheduleDeviationResource.getInstance().getByWorkScheduleId(DeviationType.Clinic, workScheduleIds);
         return new ClinicScheduleInfo(workSchedules, deviations);
     }
 
