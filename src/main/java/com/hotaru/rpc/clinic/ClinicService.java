@@ -5,7 +5,6 @@ import com.hotaru.core.exceptions.ValidationException;
 import com.hotaru.database.entities.Clinic;
 import com.hotaru.database.entities.ClinicWorkSchedule;
 import com.hotaru.database.resources.ClinicResource;
-import com.hotaru.database.resources.ClinicWorkScheduleResource;
 import com.hotaru.rest.validation.forms.ClinicValidationForm;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package com.hotaru.rpc;
 
 import com.googlecode.jsonrpc4j.JsonRpcMethod;
+import com.hotaru.business.managers.EmployeeManager;
 import com.hotaru.core.exceptions.ValidationException;
 import com.hotaru.database.entities.Employee;
 import com.hotaru.database.entities.Login;
@@ -18,12 +19,7 @@ public class EmployeeService implements EmployeeServiceBase {
     }
 
     public int add(Employee employee, Login login) throws ValidationException {
-        EmployeeValidationForm.INSTANCE.validate(employee);
-        EmployeeResource.getInstance().saveOrUpdate(employee);
-        int employeeId = employee.getId();
-        login.setUserId(employeeId);
-        LoginResource.getInstance().saveOrUpdate(login);
-        return employeeId;
+        return EmployeeManager.getInstance().addEmployee(employee, login);
     }
 
     public void update(Employee employee, Login login) throws ValidationException {

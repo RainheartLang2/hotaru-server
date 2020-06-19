@@ -38,5 +38,6 @@
         <mapping class="com.hotaru.database.entities.AnimalColor"/>
         <mapping class="com.hotaru.database.entities.ClinicWorkSchedule"/>
         <mapping class="com.hotaru.database.entities.ClinicScheduleDeviation"/>
+        <mapping class="com.hotaru.database.entities.EmployeeWorkSchedule"/>
     </session-factory>
 </hibernate-configuration>

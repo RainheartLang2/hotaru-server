@@ -5,12 +5,14 @@ import java.util.List;
 public class WorkSchedule {
     private int length;
     private List<DaySchedule> schedule;
+    private boolean weekly;
 
     public WorkSchedule() {}
 
-    public WorkSchedule(int length, List<DaySchedule> schedule) {
+    public WorkSchedule(int length, boolean weekly, List<DaySchedule> schedule) {
         this.length = length;
         this.schedule = schedule;
+        this.weekly = weekly;
     }
 
     public int getLength() {
@@ -35,5 +37,13 @@ public class WorkSchedule {
 
     public void setDaySchedule(int dayNumber, DaySchedule daySchedule) {
         schedule.set(dayNumber, daySchedule);
+    }
+
+    public boolean isWeekly() {
+        return weekly;
+    }
+
+    public void setWeekly(boolean weekly) {
+        this.weekly = weekly;
     }
 }

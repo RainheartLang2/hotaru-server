@@ -26,6 +26,7 @@ public class ClinicManager {
                 false,
                 true,
                 new WorkSchedule(DEFAULT_WORK_SCHEDULE_LENGTH,
+                        true,
                         CollectionUtils.fillArray(DEFAULT_WORK_SCHEDULE_LENGTH, DEFAULT_DAY_SCHEDULE)));
         ClinicWorkScheduleResource.getInstance().saveOrUpdate(clinicWorkSchedule);
     }
