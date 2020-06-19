@@ -1,11 +1,12 @@
 package com.hotaru.rpc.clinicWorkSchedule;
 
+import com.hotaru.business.managers.WorkScheduleManager;
 import com.hotaru.core.entities.DaySchedule;
 import com.hotaru.core.entities.TimeRange;
 import com.hotaru.core.entities.WorkScheduleDeviation;
-import com.hotaru.database.entities.ClinicScheduleDeviation;
+import com.hotaru.database.entities.WorkScheduleDeviationContainer;
 import com.hotaru.database.entities.ClinicWorkSchedule;
-import com.hotaru.database.resources.ClinicScheduleDeviationResource;
+import com.hotaru.database.resources.WorkScheduleDeviationResource;
 import com.hotaru.database.resources.ClinicWorkScheduleResource;
 
 import java.sql.Date;
@@ -18,7 +19,7 @@ public class ClinicWorkScheduleService {
         List<ClinicWorkSchedule> workSchedules = ClinicWorkScheduleResource.getInstance().getAll();
         List<Integer> workScheduleIds = workSchedules.stream().map(schedule -> schedule.getId()).collect(Collectors.toList());
         workScheduleIds.add(null);
-        List<ClinicScheduleDeviation> deviations = ClinicScheduleDeviationResource.getInstance().getByWorkScheduleId(workScheduleIds);
+        List<WorkScheduleDeviationContainer> deviations = WorkScheduleDeviationResource.getInstance().getByWorkScheduleId(workScheduleIds);
         return new ClinicScheduleInfo(workSchedules, deviations);
     }
 
@@ -42,36 +43,19 @@ public class ClinicWorkScheduleService {
     }
 
     public int createDeviation(String name, Integer workScheduleId, Date startDate, Date endDate, List<TimeRange> records) {
-        ClinicScheduleDeviationResource resource = ClinicScheduleDeviationResource.getInstance();
-        ClinicScheduleDeviation deviation = new ClinicScheduleDeviation();
-        deviation.setName(name);
-        deviation.setWorkScheduleId(workScheduleId);
-        deviation.setDeviationData(new WorkScheduleDeviation(startDate, endDate, new DaySchedule(records)));
-        resource.saveOrUpdate(deviation);
-        return deviation.getId();
+        return WorkScheduleManager.getInstance().createDeviation(name, workScheduleId, startDate, endDate, records);
     }
 
     public void updateDeviationDates(int id, Date startDate, Date endDate) {
-        ClinicScheduleDeviationResource resource = ClinicScheduleDeviationResource.getInstance();
-        ClinicScheduleDeviation deviation = resource.getById(id);
-        deviation.getDeviationData().setStartDate(startDate);
-        deviation.getDeviationData().setEndDate(endDate);
-        resource.saveOrUpdate(deviation);
+        WorkScheduleManager.getInstance().updateDeviationDates(id, startDate, endDate);
     }
 
     public void updateDeviation(int id, String name, Integer workScheduleId, Date startDate, Date endDate, List<TimeRange> records) {
-        ClinicScheduleDeviationResource resource = ClinicScheduleDeviationResource.getInstance();
-        ClinicScheduleDeviation deviation = resource.getById(id);
-        deviation.setName(name);
-        deviation.setWorkScheduleId(workScheduleId);
-        deviation.getDeviationData().setStartDate(startDate);
-        deviation.getDeviationData().setEndDate(endDate);
-        deviation.getDeviationData().setChanges(new DaySchedule(records));
-        resource.saveOrUpdate(deviation);
+        WorkScheduleManager.getInstance().updateDeviation(id, name, workScheduleId, startDate, endDate, records);
     }
 
     public void deleteDeviation(int id) {
-        ClinicScheduleDeviationResource.getInstance().delete(id);
+        WorkScheduleManager.getInstance().deleteDeviation(id);
     }
 
     public void update(ClinicWorkSchedule diagnosis) {

@@ -1,14 +1,15 @@
 package com.hotaru.database.entities;
 
+import com.hotaru.business.logic.enums.DeviationType;
 import com.hotaru.core.database.Identifiable;
 import com.hotaru.core.entities.WorkScheduleDeviation;
 import com.hotaru.database.converters.ScheduleDeviationJsonConverter;
 
 import javax.persistence.*;
 
-@Table(name="clinicScheduleDeviation")
-@Entity(name="clinicScheduleDeviation")
-public class ClinicScheduleDeviation implements Identifiable {
+@Table(name="workScheduleDeviation")
+@Entity(name="workScheduleDeviation")
+public class WorkScheduleDeviationContainer implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,11 +20,14 @@ public class ClinicScheduleDeviation implements Identifiable {
     @Column(name="workScheduleId")
     private Integer workScheduleId;
 
+    @Column(name="type")
+    private DeviationType type;
+
     @Column(name="deviationData")
     @Convert(converter = ScheduleDeviationJsonConverter.class)
     private WorkScheduleDeviation deviationData;
 
-    public ClinicScheduleDeviation() {}
+    public WorkScheduleDeviationContainer() {}
 
     public String getName() {
         return name;
@@ -57,5 +61,13 @@ public class ClinicScheduleDeviation implements Identifiable {
     @Override
     public void setId(int id) {
         this.id = id;
+    }
+
+    public DeviationType getType() {
+        return type;
+    }
+
+    public void setType(DeviationType type) {
+        this.type = type;
     }
 }

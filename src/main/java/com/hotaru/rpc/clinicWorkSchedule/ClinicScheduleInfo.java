@@ -1,15 +1,15 @@
 package com.hotaru.rpc.clinicWorkSchedule;
 
-import com.hotaru.database.entities.ClinicScheduleDeviation;
+import com.hotaru.database.entities.WorkScheduleDeviationContainer;
 import com.hotaru.database.entities.ClinicWorkSchedule;
 
 import java.util.List;
 
 public class ClinicScheduleInfo {
     private List<ClinicWorkSchedule> workSchedules;
-    private List<ClinicScheduleDeviation> deviations;
+    private List<WorkScheduleDeviationContainer> deviations;
 
-    public ClinicScheduleInfo(List<ClinicWorkSchedule> workSchedules, List<ClinicScheduleDeviation> deviations) {
+    public ClinicScheduleInfo(List<ClinicWorkSchedule> workSchedules, List<WorkScheduleDeviationContainer> deviations) {
         this.workSchedules = workSchedules;
         this.deviations = deviations;
     }
@@ -22,11 +22,11 @@ public class ClinicScheduleInfo {
         this.workSchedules = workSchedules;
     }
 
-    public List<ClinicScheduleDeviation> getDeviations() {
+    public List<WorkScheduleDeviationContainer> getDeviations() {
         return deviations;
     }
 
-    public void setDeviations(List<ClinicScheduleDeviation> deviations) {
+    public void setDeviations(List<WorkScheduleDeviationContainer> deviations) {
         this.deviations = deviations;
     }
 }

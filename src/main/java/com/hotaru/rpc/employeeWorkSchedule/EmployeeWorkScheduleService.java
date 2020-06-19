@@ -1,6 +1,7 @@
 package com.hotaru.rpc.employeeWorkSchedule;
 
 import com.hotaru.business.managers.EmployeeManager;
+import com.hotaru.business.managers.WorkScheduleManager;
 import com.hotaru.core.entities.DaySchedule;
 import com.hotaru.core.entities.TimeRange;
 import com.hotaru.core.entities.WorkSchedule;
@@ -8,7 +9,7 @@ import com.hotaru.core.util.CollectionUtils;
 import com.hotaru.database.entities.EmployeeWorkSchedule;
 import com.hotaru.database.resources.EmployeeWorkScheduleResource;
 
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 public class EmployeeWorkScheduleService {
@@ -47,6 +48,21 @@ public class EmployeeWorkScheduleService {
         schedule.setSchedule(new WorkSchedule(7, true, CollectionUtils.fillArray(7, new DaySchedule())));
         EmployeeWorkScheduleResource resource = EmployeeWorkScheduleResource.getInstance();
         resource.saveOrUpdate(schedule);
+    }
 
+    public int createDeviation(String name, Integer workScheduleId, Date startDate, Date endDate, List<TimeRange> records) {
+        return WorkScheduleManager.getInstance().createDeviation(name, workScheduleId, startDate, endDate, records);
+    }
+
+    public void updateDeviationDates(int id, Date startDate, Date endDate) {
+        WorkScheduleManager.getInstance().updateDeviationDates(id, startDate, endDate);
+    }
+
+    public void updateDeviation(int id, String name, Integer workScheduleId, Date startDate, Date endDate, List<TimeRange> records) {
+        WorkScheduleManager.getInstance().updateDeviation(id, name, workScheduleId, startDate, endDate, records);
+    }
+
+    public void deleteDeviation(int id) {
+        WorkScheduleManager.getInstance().deleteDeviation(id);
     }
 }
