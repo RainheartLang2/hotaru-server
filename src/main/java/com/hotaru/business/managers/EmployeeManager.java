@@ -10,6 +10,8 @@ import com.hotaru.database.resources.EmployeeWorkScheduleResource;
 import com.hotaru.database.resources.LoginResource;
 import com.hotaru.rest.validation.forms.EmployeeValidationForm;
 
+import java.util.Date;
+
 public class EmployeeManager {
     private static EmployeeManager INSTANCE = new EmployeeManager();
 
@@ -29,7 +31,7 @@ public class EmployeeManager {
         login.setUserId(employeeId);
         LoginResource.getInstance().saveOrUpdate(login);
 
-        EmployeeWorkSchedule employeeWorkSchedule = new EmployeeWorkSchedule(employee.getId(), false, true,
+        EmployeeWorkSchedule employeeWorkSchedule = new EmployeeWorkSchedule(employee.getId(), new Date(), false, true,
                 new WorkSchedule(DEFAULT_WORK_SCHEDULE_LENGTH,
                                 true,
                                         CollectionUtils.fillArray(DEFAULT_WORK_SCHEDULE_LENGTH, DEFAULT_DAY_SCHEDULE)));
@@ -42,7 +44,7 @@ public class EmployeeManager {
         if (employeeId == 0) {
             return resource.getDefaultSchedule();
         } else {
-            return resource.getByEmployeeId(employeeId);
+            return resource.getActualByEmployeeId(employeeId);
         }
     }
 }

@@ -5,6 +5,7 @@ import com.hotaru.core.entities.WorkSchedule;
 import com.hotaru.database.converters.WorkScheduleJsonConverter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name="clinicWorkSchedule")
 @Entity(name="clinicWorkSchedule")
@@ -31,9 +32,16 @@ public class ClinicWorkSchedule implements Identifiable {
     @Convert(converter = WorkScheduleJsonConverter.class)
     private WorkSchedule schedule;
 
-    public ClinicWorkSchedule(Integer clinicId, boolean _default, boolean usesDefault, WorkSchedule schedule) {
+    @Column(name="startDate")
+    private Date startDate;
+
+    @Column(name="endDate")
+    private Date endDate;
+
+    public ClinicWorkSchedule(Integer clinicId, Date startDate, boolean _default, boolean usesDefault, WorkSchedule schedule) {
         this.clinicId = clinicId;
         this.defaultSchedule = _default;
+        this.startDate = startDate;
         this.usesDefault = usesDefault;
         this.schedule = schedule;
     }
@@ -78,5 +86,21 @@ public class ClinicWorkSchedule implements Identifiable {
 
     public void setSchedule(WorkSchedule schedule) {
         this.schedule = schedule;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

@@ -2,7 +2,11 @@ package com.hotaru.database.resources;
 
 import com.hotaru.core.database.ResourceBase;
 import com.hotaru.database.entities.EmployeeWorkSchedule;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+
+import java.util.Date;
+import java.util.List;
 
 public class EmployeeWorkScheduleResource extends ResourceBase<EmployeeWorkSchedule> {
     private static EmployeeWorkScheduleResource INSTANCE = new EmployeeWorkScheduleResource();
@@ -14,11 +18,25 @@ public class EmployeeWorkScheduleResource extends ResourceBase<EmployeeWorkSched
         return INSTANCE;
     }
 
-    public EmployeeWorkSchedule getByEmployeeId(int employeeId) {
-        return (EmployeeWorkSchedule) getSession().
-                createCriteria(EmployeeWorkSchedule.class)
+    public EmployeeWorkSchedule getActualByEmployeeId(int employeeId) {
+        return (EmployeeWorkSchedule) getSession()
+                .createCriteria(EmployeeWorkSchedule.class)
                 .add(Restrictions.in("employeeId", employeeId))
+                .add(Restrictions.isNull("endDate"))
                 .uniqueResult();
+    }
+
+    public List<EmployeeWorkSchedule> getScheduleForDateRange(int employeeId, Date startDate, Date endDate) {
+        return getSession()
+                .createCriteria(EmployeeWorkSchedule.class)
+                .add(Restrictions.eq("employeeId", employeeId))
+                .add(Restrictions.or(
+                        Restrictions.and(Restrictions.isNull("endDate"), Restrictions.le("startDate", endDate)),
+                        Restrictions.and(Restrictions.ge("startDate", startDate), Restrictions.le("startDate", endDate)),
+                        Restrictions.and(Restrictions.ge("endDate", startDate), Restrictions.le("endDate", endDate))
+                ))
+                .addOrder(Order.asc("startDate"))
+                .list();
     }
 
     public EmployeeWorkSchedule getDefaultSchedule() {

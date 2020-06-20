@@ -6,7 +6,7 @@ import com.hotaru.core.entities.WorkScheduleDeviation;
 import com.hotaru.database.entities.WorkScheduleDeviationContainer;
 import com.hotaru.database.resources.WorkScheduleDeviationResource;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class WorkScheduleManager {

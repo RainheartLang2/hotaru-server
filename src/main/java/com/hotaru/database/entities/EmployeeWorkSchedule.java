@@ -5,6 +5,7 @@ import com.hotaru.core.entities.WorkSchedule;
 import com.hotaru.database.converters.WorkScheduleJsonConverter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name="employeeWorkSchedule")
 @Entity(name="employeeWorkSchedule")
@@ -12,10 +13,11 @@ public class EmployeeWorkSchedule implements Identifiable {
 
     public EmployeeWorkSchedule() {}
 
-    public EmployeeWorkSchedule(Integer employeeId, boolean defaultSchedule, boolean usesDefault, WorkSchedule schedule) {
+    public EmployeeWorkSchedule(Integer employeeId, Date startDate, boolean defaultSchedule, boolean usesDefault, WorkSchedule schedule) {
         this.employeeId = employeeId;
         this.defaultSchedule = defaultSchedule;
         this.usesDefault = usesDefault;
+        this.startDate = startDate;
         this.schedule = schedule;
     }
 
@@ -33,9 +35,15 @@ public class EmployeeWorkSchedule implements Identifiable {
     private boolean usesDefault;
 
 
-    @Column(name="workSchedule")
+    @Column(name="workSchedule", length = 1024)
     @Convert(converter = WorkScheduleJsonConverter.class)
     private WorkSchedule schedule;
+
+    @Column(name="startDate")
+    private Date startDate;
+
+    @Column(name="endDate")
+    private Date endDate;
 
     @Override
     public int getId() {
@@ -77,5 +85,21 @@ public class EmployeeWorkSchedule implements Identifiable {
 
     public void setSchedule(WorkSchedule schedule) {
         this.schedule = schedule;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

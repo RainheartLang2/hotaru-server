@@ -1,5 +1,9 @@
 package com.hotaru.core.entities;
 
+import com.hotaru.core.util.CollectionUtils;
+import com.hotaru.utils.DateHelper;
+
+import java.util.Date;
 import java.util.List;
 
 public class WorkSchedule {
@@ -45,5 +49,30 @@ public class WorkSchedule {
 
     public void setWeekly(boolean weekly) {
         this.weekly = weekly;
+    }
+
+    public void setScheduleLength(int length) {
+        this.length = length;
+        this.weekly = false;
+        this.schedule = CollectionUtils.fillArray(7, new DaySchedule());
+    }
+
+    public void setWeeklyFlag() {
+        this.length = 7;
+        this.weekly = true;
+        this.schedule = CollectionUtils.fillArray(7, new DaySchedule());
+    }
+
+    public DaySchedule getDayScheduleForDate(Date startDate, Date date) {
+        if (this.weekly) {
+            return this.schedule.get(date.getDay());
+        }
+
+        long difference = DateHelper.getDifferenceInDays(startDate, date);
+        if (difference < 0) {
+            return null;
+        }
+        int index = (int) (difference % this.length);
+        return this.schedule.get(index);
     }
 }

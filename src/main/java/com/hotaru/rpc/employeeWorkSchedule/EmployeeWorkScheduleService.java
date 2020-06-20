@@ -5,14 +5,14 @@ import com.hotaru.business.managers.EmployeeManager;
 import com.hotaru.business.managers.WorkScheduleManager;
 import com.hotaru.core.entities.DaySchedule;
 import com.hotaru.core.entities.TimeRange;
-import com.hotaru.core.entities.WorkSchedule;
-import com.hotaru.core.util.CollectionUtils;
 import com.hotaru.database.entities.EmployeeWorkSchedule;
 import com.hotaru.database.entities.WorkScheduleDeviationContainer;
 import com.hotaru.database.resources.EmployeeWorkScheduleResource;
 import com.hotaru.database.resources.WorkScheduleDeviationResource;
+import com.hotaru.utils.DateHelper;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,9 +26,28 @@ public class EmployeeWorkScheduleService {
         return new EmployeeScheduleInfo(workSchedules, deviations);
     }
 
+    public List<DaySchedule> getDateRangeSchedule(int employeeId, Date startDate, Date endDate) {
+        List<EmployeeWorkSchedule> schedules =
+                EmployeeWorkScheduleResource.getInstance().getScheduleForDateRange(employeeId, startDate, endDate);
+        List<DaySchedule> result = new ArrayList<>();
+        Date date = startDate;
+        int schedulesIndex = 0;
+        EmployeeWorkSchedule schedule = schedules.get(schedulesIndex);
+        while (!date.after(endDate)) {
+            while (schedule.getEndDate() != null && date.after(schedule.getEndDate())) {
+                schedulesIndex ++;
+                schedule = schedules.get(schedulesIndex);
+            }
+            DaySchedule daySchedule = schedule.getSchedule().getDayScheduleForDate(schedule.getStartDate(), date);
+            result.add(daySchedule != null ? daySchedule : new DaySchedule());
+            date = DateHelper.getNextDay(date);
+        }
+        return result;
+    }
+
     public void setUseDefaultFlag(int employeeId, boolean useDefault) {
         EmployeeWorkScheduleResource resource = EmployeeWorkScheduleResource.getInstance();
-        EmployeeWorkSchedule schedule = resource.getByEmployeeId(employeeId);
+        EmployeeWorkSchedule schedule = resource.getActualByEmployeeId(employeeId);
         schedule.setUsesDefault(useDefault);
         resource.saveOrUpdate(schedule);
     }
@@ -43,14 +62,14 @@ public class EmployeeWorkScheduleService {
 
     public void setScheduleLength(int employeeId, int scheduleLength) {
         EmployeeWorkSchedule schedule = EmployeeManager.getInstance().getWorkScheduleByEmployeeId(employeeId);
-        schedule.setSchedule(new WorkSchedule(scheduleLength, false, CollectionUtils.fillArray(scheduleLength, new DaySchedule())));
+        schedule.getSchedule().setScheduleLength(scheduleLength);
         EmployeeWorkScheduleResource resource = EmployeeWorkScheduleResource.getInstance();
         resource.saveOrUpdate(schedule);
     }
 
     public void setWeekly(int employeeId) {
         EmployeeWorkSchedule schedule = EmployeeManager.getInstance().getWorkScheduleByEmployeeId(employeeId);
-        schedule.setSchedule(new WorkSchedule(7, true, CollectionUtils.fillArray(7, new DaySchedule())));
+        schedule.getSchedule().setWeeklyFlag();
         EmployeeWorkScheduleResource resource = EmployeeWorkScheduleResource.getInstance();
         resource.saveOrUpdate(schedule);
     }

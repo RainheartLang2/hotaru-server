@@ -8,6 +8,8 @@ import com.hotaru.database.entities.ClinicWorkSchedule;
 import com.hotaru.database.resources.ClinicResource;
 import com.hotaru.database.resources.ClinicWorkScheduleResource;
 
+import java.util.Date;
+
 public class ClinicManager {
     private static ClinicManager INSTANCE = new ClinicManager();
 
@@ -23,6 +25,7 @@ public class ClinicManager {
     public void addClinic(Clinic clinic) {
         ClinicResource.getInstance().saveOrUpdate(clinic);
         ClinicWorkSchedule clinicWorkSchedule = new ClinicWorkSchedule(clinic.getId(),
+                new Date(),
                 false,
                 true,
                 new WorkSchedule(DEFAULT_WORK_SCHEDULE_LENGTH,
