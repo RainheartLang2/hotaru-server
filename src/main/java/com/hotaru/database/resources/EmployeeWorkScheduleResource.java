@@ -29,7 +29,7 @@ public class EmployeeWorkScheduleResource extends ResourceBase<EmployeeWorkSched
     public List<EmployeeWorkSchedule> getScheduleForDateRange(int employeeId, Date startDate, Date endDate) {
         return getSession()
                 .createCriteria(EmployeeWorkSchedule.class)
-                .add(Restrictions.eq("employeeId", employeeId))
+                .add(Restrictions.or(Restrictions.eq("employeeId", employeeId), Restrictions.eq("defaultSchedule", true)))
                 .add(Restrictions.or(
                         Restrictions.and(Restrictions.isNull("endDate"), Restrictions.le("startDate", endDate)),
                         Restrictions.and(Restrictions.ge("startDate", startDate), Restrictions.le("startDate", endDate)),
@@ -37,6 +37,29 @@ public class EmployeeWorkScheduleResource extends ResourceBase<EmployeeWorkSched
                 ))
                 .addOrder(Order.asc("startDate"))
                 .list();
+    }
+
+    public List<EmployeeWorkSchedule> getDefaultSchedulesForDateRange(Date startDate, Date endDate) {
+        return getSession()
+                .createCriteria(EmployeeWorkSchedule.class)
+                .add(Restrictions.eq("defaultSchedule", true))
+                .add(Restrictions.or(
+                        Restrictions.and(Restrictions.isNull("endDate"), Restrictions.le("startDate", endDate)),
+                        Restrictions.and(Restrictions.ge("startDate", startDate), Restrictions.le("startDate", endDate)),
+                        Restrictions.and(Restrictions.ge("endDate", startDate), Restrictions.le("endDate", endDate))
+                ))
+                .addOrder(Order.asc("startDate"))
+                .list();
+    }
+
+    public EmployeeWorkSchedule getDefaultScheduleForDate(Date date) {
+        return (EmployeeWorkSchedule) getSession()
+                .createCriteria(EmployeeWorkSchedule.class)
+                .add(Restrictions.eq("defaultSchedule", true))
+                .add(Restrictions.and(Restrictions.le("startDate", date),
+                        Restrictions.or(Restrictions.isNull("endDate"), Restrictions.ge("endDate", date))
+                ))
+                .uniqueResult();
     }
 
     public EmployeeWorkSchedule getDefaultSchedule() {

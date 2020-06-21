@@ -2,10 +2,11 @@ package com.hotaru.database.entities;
 
 import com.hotaru.business.logic.enums.DeviationType;
 import com.hotaru.core.database.Identifiable;
-import com.hotaru.core.entities.WorkScheduleDeviation;
-import com.hotaru.database.converters.ScheduleDeviationJsonConverter;
+import com.hotaru.core.entities.DaySchedule;
+import com.hotaru.database.converters.DayScheduleJsonConverter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name="workScheduleDeviation")
 @Entity(name="workScheduleDeviation")
@@ -23,9 +24,15 @@ public class WorkScheduleDeviationContainer implements Identifiable {
     @Column(name="type")
     private DeviationType type;
 
-    @Column(name="deviationData")
-    @Convert(converter = ScheduleDeviationJsonConverter.class)
-    private WorkScheduleDeviation deviationData;
+    @Column(name="startDate")
+    private Date startDate;
+
+    @Column(name="endDate")
+    private Date endDate;
+
+    @Column(name="changes")
+    @Convert(converter = DayScheduleJsonConverter.class)
+    private DaySchedule changes;
 
     public WorkScheduleDeviationContainer() {}
 
@@ -45,12 +52,10 @@ public class WorkScheduleDeviationContainer implements Identifiable {
         this.workScheduleId = clinicId;
     }
 
-    public WorkScheduleDeviation getDeviationData() {
-        return deviationData;
-    }
-
-    public void setDeviationData(WorkScheduleDeviation deviationData) {
-        this.deviationData = deviationData;
+    public void setDeviationData(Date startDate, Date endDate, DaySchedule changes) {
+        this.setStartDate(startDate);
+        this.setEndDate(endDate);
+        this.setChanges(changes);
     }
 
     @Override
@@ -69,5 +74,29 @@ public class WorkScheduleDeviationContainer implements Identifiable {
 
     public void setType(DeviationType type) {
         this.type = type;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public DaySchedule getChanges() {
+        return changes;
+    }
+
+    public void setChanges(DaySchedule changes) {
+        this.changes = changes;
     }
 }

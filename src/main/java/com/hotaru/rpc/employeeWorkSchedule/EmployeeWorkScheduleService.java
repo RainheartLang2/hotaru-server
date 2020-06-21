@@ -9,9 +9,7 @@ import com.hotaru.database.entities.EmployeeWorkSchedule;
 import com.hotaru.database.entities.WorkScheduleDeviationContainer;
 import com.hotaru.database.resources.EmployeeWorkScheduleResource;
 import com.hotaru.database.resources.WorkScheduleDeviationResource;
-import com.hotaru.utils.DateHelper;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,23 +24,10 @@ public class EmployeeWorkScheduleService {
         return new EmployeeScheduleInfo(workSchedules, deviations);
     }
 
-    public List<DaySchedule> getDateRangeSchedule(int employeeId, Date startDate, Date endDate) {
+    public List<EmployeeWorkSchedule> getDateRangeSchedule(int employeeId, Date startDate, Date endDate) {
         List<EmployeeWorkSchedule> schedules =
                 EmployeeWorkScheduleResource.getInstance().getScheduleForDateRange(employeeId, startDate, endDate);
-        List<DaySchedule> result = new ArrayList<>();
-        Date date = startDate;
-        int schedulesIndex = 0;
-        EmployeeWorkSchedule schedule = schedules.get(schedulesIndex);
-        while (!date.after(endDate)) {
-            while (schedule.getEndDate() != null && date.after(schedule.getEndDate())) {
-                schedulesIndex ++;
-                schedule = schedules.get(schedulesIndex);
-            }
-            DaySchedule daySchedule = schedule.getSchedule().getDayScheduleForDate(schedule.getStartDate(), date);
-            result.add(daySchedule != null ? daySchedule : new DaySchedule());
-            date = DateHelper.getNextDay(date);
-        }
-        return result;
+        return schedules;
     }
 
     public void setUseDefaultFlag(int employeeId, boolean useDefault) {
