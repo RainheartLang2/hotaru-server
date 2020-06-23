@@ -44,7 +44,7 @@ public class ClinicWorkScheduleService {
     }
 
     public int createDeviation(String name, Integer workScheduleId, Date startDate, Date endDate, List<TimeRange> records) {
-        return WorkScheduleManager.getInstance().createDeviation(name, workScheduleId, startDate, endDate, records);
+        return WorkScheduleManager.getInstance().createDeviation(name, DeviationType.Clinic, workScheduleId, startDate, endDate, records);
     }
 
     public void updateDeviationDates(int id, Date startDate, Date endDate) {

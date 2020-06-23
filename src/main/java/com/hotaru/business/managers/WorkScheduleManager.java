@@ -1,5 +1,6 @@
 package com.hotaru.business.managers;
 
+import com.hotaru.business.logic.enums.DeviationType;
 import com.hotaru.core.entities.DaySchedule;
 import com.hotaru.core.entities.TimeRange;
 import com.hotaru.database.entities.WorkScheduleDeviationContainer;
@@ -17,10 +18,11 @@ public class WorkScheduleManager {
 
     private WorkScheduleManager() {}
 
-    public int createDeviation(String name, Integer workScheduleId, Date startDate, Date endDate, List<TimeRange> records) {
+    public int createDeviation(String name, DeviationType type, Integer workScheduleId, Date startDate, Date endDate, List<TimeRange> records) {
         WorkScheduleDeviationResource resource = WorkScheduleDeviationResource.getInstance();
         WorkScheduleDeviationContainer deviation = new WorkScheduleDeviationContainer();
         deviation.setName(name);
+        deviation.setType(type);
         deviation.setWorkScheduleId(workScheduleId);
         deviation.setDeviationData(startDate, endDate, new DaySchedule(records));
         resource.saveOrUpdate(deviation);

@@ -54,7 +54,7 @@ public class WorkSchedule {
     public void setScheduleLength(int length) {
         this.length = length;
         this.weekly = false;
-        this.schedule = CollectionUtils.fillArray(7, new DaySchedule());
+        this.schedule = CollectionUtils.fillArray(length, new DaySchedule());
     }
 
     public void setWeeklyFlag() {

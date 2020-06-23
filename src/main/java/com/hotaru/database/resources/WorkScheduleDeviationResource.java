@@ -5,6 +5,7 @@ import com.hotaru.core.database.ResourceBase;
 import com.hotaru.database.entities.WorkScheduleDeviationContainer;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.Date;
 import java.util.List;
 
 public class WorkScheduleDeviationResource extends ResourceBase<WorkScheduleDeviationContainer> {
@@ -24,6 +25,20 @@ public class WorkScheduleDeviationResource extends ResourceBase<WorkScheduleDevi
                 .add(Restrictions.eq("type", type))
                 .list();
     }
+
+    public List<WorkScheduleDeviationContainer> getByDateRange(DeviationType type, List<Integer> workScheduleIds, Date startDate, Date endDate) {
+        return getSession().
+                createCriteria(WorkScheduleDeviationContainer.class)
+                .add(Restrictions.in("workScheduleId", workScheduleIds))
+                .add(Restrictions.eq("type", type))
+                .add(Restrictions.or(
+                        Restrictions.and(Restrictions.ge("startDate", startDate),
+                                         Restrictions.le("startDate", endDate )),
+                        Restrictions.and(Restrictions.ge("endDate", startDate),
+                                         Restrictions.le("endDate", endDate))))
+                .list();
+    }
+
 
     public WorkScheduleDeviationContainer getByWorkScheduleId(Integer workScheduleId) {
         return (WorkScheduleDeviationContainer) getSession().

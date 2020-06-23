@@ -19,15 +19,19 @@ public class EmployeeWorkScheduleService {
         List<EmployeeWorkSchedule> workSchedules = EmployeeWorkScheduleResource.getInstance().getAll();
         List<Integer> workScheduleIds = workSchedules.stream().map(schedule -> schedule.getId()).collect(Collectors.toList());
         workScheduleIds.add(null);
-        List<WorkScheduleDeviationContainer> deviations = WorkScheduleDeviationResource.getInstance().getByWorkScheduleId(DeviationType.Clinic, workScheduleIds);
+        List<WorkScheduleDeviationContainer> deviations = WorkScheduleDeviationResource.getInstance().getByWorkScheduleId(DeviationType.Employee, workScheduleIds);
 
         return new EmployeeScheduleInfo(workSchedules, deviations);
     }
 
-    public List<EmployeeWorkSchedule> getDateRangeSchedule(int employeeId, Date startDate, Date endDate) {
+    public EmployeeScheduleInfo getDateRangeSchedule(int employeeId, Date startDate, Date endDate) {
         List<EmployeeWorkSchedule> schedules =
                 EmployeeWorkScheduleResource.getInstance().getScheduleForDateRange(employeeId, startDate, endDate);
-        return schedules;
+        List<Integer> workScheduleIds = schedules.stream().map(schedule -> schedule.getId()).collect(Collectors.toList());
+        workScheduleIds.add(null);
+        List<WorkScheduleDeviationContainer> deviations =
+                WorkScheduleDeviationResource.getInstance().getByDateRange(DeviationType.Employee, workScheduleIds, startDate, endDate);
+        return new EmployeeScheduleInfo(schedules, deviations);
     }
 
     public void setUseDefaultFlag(int employeeId, boolean useDefault) {
@@ -60,7 +64,7 @@ public class EmployeeWorkScheduleService {
     }
 
     public int createDeviation(String name, Integer workScheduleId, Date startDate, Date endDate, List<TimeRange> records) {
-        return WorkScheduleManager.getInstance().createDeviation(name, workScheduleId, startDate, endDate, records);
+        return WorkScheduleManager.getInstance().createDeviation(name, DeviationType.Employee, workScheduleId, startDate, endDate, records);
     }
 
     public void updateDeviationDates(int id, Date startDate, Date endDate) {
