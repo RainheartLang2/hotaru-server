@@ -12,6 +12,7 @@ import com.hotaru.rpc.clinicWorkSchedule.ClinicWorkScheduleService;
 import com.hotaru.rpc.diagnosis.DiagnosisService;
 import com.hotaru.rpc.employeeWorkSchedule.EmployeeWorkScheduleService;
 import com.hotaru.rpc.measure.MeasureService;
+import com.hotaru.rpc.pet.PetService;
 import com.hotaru.rpc.profile.UserProfileService;
 import com.hotaru.rpc.species.SpeciesService;
 import com.hotaru.rpc.visitPurpose.VisitPurposeService;
@@ -42,6 +43,7 @@ public class UserZoneServlet extends HttpServlet {
         jsonRpcServer.addService("AnimalColorService", new AnimalColorService(), AnimalColorService.class);
         jsonRpcServer.addService("ClinicWorkScheduleService", new ClinicWorkScheduleService(), ClinicWorkScheduleService.class);
         jsonRpcServer.addService("EmployeeWorkScheduleService", new EmployeeWorkScheduleService(), EmployeeWorkScheduleService.class);
+        jsonRpcServer.addService("PetService", new PetService(), PetService.class);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

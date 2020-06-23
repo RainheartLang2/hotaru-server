@@ -23,4 +23,8 @@ public class PetManager {
                         .map(client -> client.getId())
                         .collect(Collectors.toList()));
     }
+
+    public List<Pet> getByClientId(int clientId) {
+        return PetResource.getInstance().getByOwnerId(clientId);
+    }
 }
