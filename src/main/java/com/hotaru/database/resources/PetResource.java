@@ -23,6 +23,7 @@ public class PetResource extends ArchivableResourceBase<Pet> {
         return getSession().
                 createCriteria(Pet.class)
                 .add(Restrictions.in("ownerId", ids))
+                .add(Restrictions.in("deleted", false))
                 .list();
     }
 

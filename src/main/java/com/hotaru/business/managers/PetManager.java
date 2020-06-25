@@ -24,6 +24,19 @@ public class PetManager {
                         .collect(Collectors.toList()));
     }
 
+    public int addPet(Pet pet) {
+        PetResource.getInstance().saveOrUpdate(pet);
+        return pet.getId();
+    }
+
+    public void updatePet(Pet pet) {
+        PetResource.getInstance().saveOrUpdate(pet);
+    }
+
+    public void deletePet(int id) {
+        PetResource.getInstance().markDeleted(id);
+    }
+
     public List<Pet> getByClientId(int clientId) {
         return PetResource.getInstance().getByOwnerId(clientId);
     }
