@@ -39,5 +39,6 @@
         <mapping class="com.hotaru.database.entities.ClinicWorkSchedule"/>
         <mapping class="com.hotaru.database.entities.WorkScheduleDeviationContainer"/>
         <mapping class="com.hotaru.database.entities.EmployeeWorkSchedule"/>
+        <mapping class="com.hotaru.database.entities.PlannedCall"/>
     </session-factory>
 </hibernate-configuration>
