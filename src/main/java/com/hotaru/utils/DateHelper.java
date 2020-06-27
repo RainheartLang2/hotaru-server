@@ -25,4 +25,11 @@ public class DateHelper {
     public static Date toDate(Calendar calendar) {
         return new Date(calendar.getTimeInMillis());
     }
+
+    public static Date getPureDate(Date date) {
+        return new Date(date.getYear(), date.getMonth(), date.getDate());
+    }
+    public static Date getCurrentDate() {
+        return getPureDate(new Date());
+    }
 }

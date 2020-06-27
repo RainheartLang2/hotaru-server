@@ -1,6 +1,6 @@
 package com.hotaru.database.entities;
 
-import com.hotaru.business.logic.enums.PlannedCallState;
+import com.hotaru.business.logic.enums.PlannedCallStateType;
 import com.hotaru.core.database.Identifiable;
 
 import javax.persistence.*;
@@ -33,7 +33,7 @@ public class PlannedCall implements Identifiable {
     private String note;
 
     @Column(name="state")
-    private PlannedCallState state;
+    private PlannedCallStateType state;
 
     public PlannedCall() {
     }
@@ -94,11 +94,11 @@ public class PlannedCall implements Identifiable {
         this.note = note;
     }
 
-    public PlannedCallState getState() {
+    public PlannedCallStateType getState() {
         return state;
     }
 
-    public void setState(PlannedCallState state) {
+    public void setState(PlannedCallStateType state) {
         this.state = state;
     }
 }

@@ -1,7 +1,8 @@
 package com.hotaru.business.logic.enums;
 
-public enum PlannedCallState {
+public enum PlannedCallStateType {
     Assigned,
     Done,
     Canceled,
+    Expired,
 }
