@@ -29,6 +29,11 @@ public class Login implements Credential, Identifiable {
     public Login() {
     }
 
+    public Login(String loginName, String password) {
+        this.loginName = loginName;
+        this.password = password;
+    }
+
     @Override
     public int getId() {
         return this.id;

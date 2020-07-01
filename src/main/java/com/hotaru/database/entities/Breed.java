@@ -26,6 +26,11 @@ public class Breed implements Identifiable, Archivable {
 
     public Breed() {}
 
+    public Breed(String name, int speciesId) {
+        this.name = name;
+        this.speciesId = speciesId;
+    }
+
     public int getId() {
         return id;
     }

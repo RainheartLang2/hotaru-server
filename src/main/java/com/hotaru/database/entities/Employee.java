@@ -57,6 +57,28 @@ public class Employee implements Identifiable, Archivable {
         this.active = true;
     }
 
+    public Employee(String firstName,
+                    String middleName,
+                    String lastName,
+                    boolean deleted,
+                    Boolean active,
+                    String phone,
+                    String email,
+                    String address,
+                    Integer clinicId,
+                    String photo) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.deleted = deleted;
+        this.active = active;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.clinicId = clinicId;
+        this.photo = photo;
+    }
+
     @Override
     public int getId() {
         return id;

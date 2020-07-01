@@ -1,5 +1,6 @@
 package com.hotaru.rpc.species;
 
+import com.hotaru.business.managers.SpeciesManager;
 import com.hotaru.core.exceptions.ValidationException;
 import com.hotaru.database.entities.Species;
 import com.hotaru.database.resources.SpeciesResource;
@@ -14,13 +15,13 @@ public class SpeciesService {
 
     public int add(Species species) throws ValidationException {
         SpeciesValidationForm.INSTANCE.validate(species);
-        SpeciesResource.getInstance().saveOrUpdate(species);
+        SpeciesManager.getInstance().addSpecies(species);
         return species.getId();
     }
 
     public void update(Species species) throws ValidationException {
         SpeciesValidationForm.INSTANCE.validate(species);
-        SpeciesResource.getInstance().saveOrUpdate(species);
+        SpeciesManager.getInstance().updateSpeces(species);
     }
 
     public void delete(int id) {

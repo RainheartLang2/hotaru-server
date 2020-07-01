@@ -40,5 +40,6 @@
         <mapping class="com.hotaru.database.entities.WorkScheduleDeviationContainer"/>
         <mapping class="com.hotaru.database.entities.EmployeeWorkSchedule"/>
         <mapping class="com.hotaru.database.entities.PlannedCall"/>
+        <mapping class="com.hotaru.database.entities.SettingsRecord"/>
     </session-factory>
 </hibernate-configuration>

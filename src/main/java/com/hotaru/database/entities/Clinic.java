@@ -48,6 +48,28 @@ public class Clinic implements Identifiable, Archivable {
 
     public Clinic() {}
 
+    public Clinic(String name,
+                  String logo,
+                  String phone,
+                  String email,
+                  String siteUrl,
+                  String city,
+                  String address,
+                  boolean deleted,
+                  Boolean active,
+                  TimeZone timeZone) {
+        this.name = name;
+        this.logo = logo;
+        this.phone = phone;
+        this.email = email;
+        this.siteUrl = siteUrl;
+        this.city = city;
+        this.address = address;
+        this.deleted = deleted;
+        this.active = active;
+        this.timeZone = timeZone;
+    }
+
     @Override
     public int getId() {
         return id;

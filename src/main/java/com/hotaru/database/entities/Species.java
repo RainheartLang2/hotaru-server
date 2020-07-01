@@ -23,6 +23,11 @@ public class Species implements Identifiable, Archivable {
     public Species() {
     }
 
+    public Species(String name) {
+        this.name = name;
+        this.deleted = false;
+    }
+
     @Override
     public int getId() {
         return id;
