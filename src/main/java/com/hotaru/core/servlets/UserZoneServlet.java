@@ -21,6 +21,7 @@ import com.hotaru.rpc.pet.PetService;
 import com.hotaru.rpc.plannedCall.PlannedCallService;
 import com.hotaru.rpc.profile.UserProfileService;
 import com.hotaru.rpc.salesCategory.SalesCategoryService;
+import com.hotaru.rpc.salesUnit.SalesUnitService;
 import com.hotaru.rpc.species.SpeciesService;
 import com.hotaru.rpc.visitPurpose.VisitPurposeService;
 import com.hotaru.rpc.visitResult.VisitResultService;
@@ -75,6 +76,7 @@ public class UserZoneServlet extends HttpServlet {
         jsonRpcServer.addService("PetService", new PetService(), PetService.class);
         jsonRpcServer.addService("PlannedCallService", new PlannedCallService(), PlannedCallService.class);
         jsonRpcServer.addService(SalesCategoryService.class.getSimpleName(), new SalesCategoryService(), SalesCategoryService.class);
+        jsonRpcServer.addService(SalesUnitService.class.getSimpleName(), new SalesCategoryService(), SalesUnitService.class);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
