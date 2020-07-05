@@ -10,9 +10,9 @@ public class SalesUnitService {
         return SalesUnitResource.getInstance().getAllNotDeleted();
     }
 
-    public int add(SalesUnit category) {
-        SalesUnitResource.getInstance().saveOrUpdate(category);
-        return category.getId();
+    public int add(SalesUnit salesUnit) {
+        SalesUnitResource.getInstance().saveOrUpdate(salesUnit);
+        return salesUnit.getId();
     }
 
     public void update(SalesUnit category) {

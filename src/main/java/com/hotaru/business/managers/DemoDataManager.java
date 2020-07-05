@@ -16,7 +16,7 @@ public class DemoDataManager {
         ClinicManager clinicManager = ClinicManager.getInstance();
         Clinic clinic = new Clinic("Первая клиника",
                 null,
-                "71234567890",
+                "1234567890",
                 "test@test.com",
                 "http://localhost:3000/",
                 "Город",
@@ -29,7 +29,7 @@ public class DemoDataManager {
         Employee adminUser = new Employee("Иван", "Иванович", "Иванов",
                 false,
                 true,
-                "71112223344",
+                "1112223344",
                 "Ivanov@clinic.com",
                 "Ул. Ивановская, 1",
                 null,
@@ -39,7 +39,7 @@ public class DemoDataManager {
         Employee additionalUser = new Employee("Пётр", "Петрович", "Петров",
                 false,
                 true,
-                "71113334455",
+                "1113334455",
                 "Petrov@clinic.com",
                 "Ул. Петровская, 2",
                 clinic.getId(),
@@ -69,7 +69,7 @@ public class DemoDataManager {
         breedManager.addBreed(corgi);
 
         Client client = new Client("Павел", "Павлович", "Павлов",
-                                    "79998887766",
+                                    "9998887766",
                                     "ул. Павловская",
                                     "pavlov@pav.lov");
 
