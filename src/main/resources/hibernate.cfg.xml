@@ -44,5 +44,6 @@
         <mapping class="com.hotaru.database.entities.SalesCategory"/>
         <mapping class="com.hotaru.database.entities.SalesUnit"/>
         <mapping class="com.hotaru.database.entities.Stock"/>
+        <mapping class="com.hotaru.database.entities.CounterAgent"/>
     </session-factory>
 </hibernate-configuration>
