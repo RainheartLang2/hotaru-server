@@ -1,15 +1,13 @@
 package com.hotaru.database.entities;
 
 import com.hotaru.business.logic.enums.PersonType;
-import com.hotaru.business.logic.enums.SalesType;
 import com.hotaru.core.database.Archivable;
 import com.hotaru.core.database.Identifiable;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Table(name="counterAgent")
+@Entity(name="counterAgent")
 public class CounterAgent implements Identifiable, Archivable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +15,9 @@ public class CounterAgent implements Identifiable, Archivable {
 
     @Column(name="name", length = 100)
     private String name;
+
+    @Column(name="contactPersonName", length = 100)
+    private String contactPersonName;
 
     @Column(name="personType", length = 7)
     private PersonType personType;
@@ -45,6 +46,7 @@ public class CounterAgent implements Identifiable, Archivable {
     @Column(name="gyroAccount", length = 50)
     private String gyroAccount;
 
+    @Column(name="note", length = 2000)
     private String note;
 
     public CounterAgent() {}
@@ -147,5 +149,13 @@ public class CounterAgent implements Identifiable, Archivable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getContactPersonName() {
+        return contactPersonName;
+    }
+
+    public void setContactPersonName(String contactPersonName) {
+        this.contactPersonName = contactPersonName;
     }
 }

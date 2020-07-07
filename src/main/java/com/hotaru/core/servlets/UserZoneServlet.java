@@ -18,6 +18,7 @@ import com.hotaru.rpc.clinicWorkSchedule.ClinicWorkScheduleService;
 import com.hotaru.rpc.counterAgent.CounterAgentService;
 import com.hotaru.rpc.diagnosis.DiagnosisService;
 import com.hotaru.rpc.employeeWorkSchedule.EmployeeWorkScheduleService;
+import com.hotaru.rpc.goodsProducer.GoodsProducerService;
 import com.hotaru.rpc.measure.MeasureService;
 import com.hotaru.rpc.pet.PetService;
 import com.hotaru.rpc.plannedCall.PlannedCallService;
@@ -90,6 +91,7 @@ public class UserZoneServlet extends HttpServlet {
             jsonRpcServer.addService(SalesUnitService.class.getSimpleName(), new SalesUnitService(), SalesUnitService.class);
             registerService(jsonRpcServer, StockService.class);
             registerService(jsonRpcServer, CounterAgentService.class);
+            registerService(jsonRpcServer, GoodsProducerService.class);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             throw new ServletException(e);
         }
