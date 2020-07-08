@@ -1,0 +1,120 @@
+package com.hotaru.database.entities;
+
+import com.hotaru.core.database.Identifiable;
+import com.sun.istack.NotNull;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Table(name = "goodsPack")
+@Entity(name = "goodsPack")
+public class GoodsPack implements Identifiable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "name", length = 100)
+    private String name;
+
+    @Column(name = "stockId")
+    @NotNull
+    private int stockId;
+
+    @Column(name = "goodsTypeId")
+    @NotNull
+    private int goodsTypeId;
+
+    @Column(name = "goodsProducerId")
+    @NotNull
+    private int goodsProducerId;
+
+    @Column(name = "amount")
+    @NotNull
+    private int amount;
+
+    @Column(name = "series", length = 100)
+    private String series;
+
+    @Column(name = "creationDate")
+    private Date creationDate;
+
+    @Column(name = "expirationDate")
+    private Date expirationDate;
+
+    public GoodsPack() {
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(int stockId) {
+        this.stockId = stockId;
+    }
+
+    public int getGoodsTypeId() {
+        return goodsTypeId;
+    }
+
+    public void setGoodsTypeId(int goodsTypeId) {
+        this.goodsTypeId = goodsTypeId;
+    }
+
+    public int getGoodsProducerId() {
+        return goodsProducerId;
+    }
+
+    public void setGoodsProducerId(int goodsProducerId) {
+        this.goodsProducerId = goodsProducerId;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+}
