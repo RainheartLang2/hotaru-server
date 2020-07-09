@@ -5,6 +5,7 @@ import com.hotaru.business.logic.enums.DocumentState;
 import com.hotaru.business.logic.enums.ShipingType;
 import com.hotaru.core.database.Identifiable;
 import com.hotaru.core.util.container.CustomContainer;
+import com.hotaru.database.converters.CustomContainerJsonConverter;
 import com.hotaru.database.converters.GoodsWithPriceJsonConverter;
 import com.sun.istack.NotNull;
 
@@ -44,7 +45,7 @@ public class GoodsDocument implements Identifiable {
     private String num;
 
     @Column(name="goods")
-    @Convert(converter = CustomContainer.class)
+    @Convert(converter = CustomContainerJsonConverter.class)
     private CustomContainer<GoodsPackWithPrice> goods;
 
     public GoodsDocument() {}

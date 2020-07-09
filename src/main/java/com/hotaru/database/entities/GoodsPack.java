@@ -25,8 +25,11 @@ public class GoodsPack implements Identifiable {
     private int goodsTypeId;
 
     @Column(name = "goodsProducerId")
+    private Integer goodsProducerId;
+
+    @Column(name = "incomeDocumentId")
     @NotNull
-    private int goodsProducerId;
+    private int incomeDocumentId;
 
     @Column(name = "amount")
     @NotNull
@@ -78,11 +81,11 @@ public class GoodsPack implements Identifiable {
         this.goodsTypeId = goodsTypeId;
     }
 
-    public int getGoodsProducerId() {
+    public Integer getGoodsProducerId() {
         return goodsProducerId;
     }
 
-    public void setGoodsProducerId(int goodsProducerId) {
+    public void setGoodsProducerId(Integer goodsProducerId) {
         this.goodsProducerId = goodsProducerId;
     }
 
@@ -116,5 +119,13 @@ public class GoodsPack implements Identifiable {
 
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public int getIncomeDocumentId() {
+        return incomeDocumentId;
+    }
+
+    public void setIncomeDocumentId(int incomeDocumentId) {
+        this.incomeDocumentId = incomeDocumentId;
     }
 }
