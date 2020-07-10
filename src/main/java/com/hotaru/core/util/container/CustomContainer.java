@@ -5,6 +5,8 @@ import java.util.List;
 public class CustomContainer<Type> {
     private List<Type> list;
 
+    public CustomContainer() {}
+
     public CustomContainer(List<Type> list) {
         this.list = list;
     }

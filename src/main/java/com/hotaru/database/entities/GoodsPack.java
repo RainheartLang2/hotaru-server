@@ -13,9 +13,6 @@ public class GoodsPack implements Identifiable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name", length = 100)
-    private String name;
-
     @Column(name = "stockId")
     @NotNull
     private int stockId;
@@ -47,6 +44,16 @@ public class GoodsPack implements Identifiable {
     public GoodsPack() {
     }
 
+    public GoodsPack(GoodsPackWithPrice packWithPrice, GoodsDocument incomeDocument) {
+        this.amount = packWithPrice.getAmount();
+        this.creationDate = packWithPrice.getCreationDate();
+        this.expirationDate = packWithPrice.getExpirationDate();
+        this.goodsProducerId = packWithPrice.getGoodsProducerId();
+        this.goodsTypeId = packWithPrice.getGoodsTypeId();
+        this.stockId = packWithPrice.getStockId();
+        this.incomeDocumentId = incomeDocument.getId();
+    }
+
     @Override
     public int getId() {
         return id;
@@ -55,14 +62,6 @@ public class GoodsPack implements Identifiable {
     @Override
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getStockId() {

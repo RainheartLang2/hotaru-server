@@ -1,6 +1,7 @@
 package com.hotaru.database.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hotaru.business.logic.enums.DocumentState;
 import com.hotaru.business.logic.enums.ShipingType;
 import com.hotaru.core.database.Identifiable;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Table(name="goodsDocument")
 @Entity(name="goodsDocument")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GoodsDocument implements Identifiable {
 
     @Id
