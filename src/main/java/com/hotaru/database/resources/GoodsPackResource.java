@@ -20,6 +20,7 @@ public class GoodsPackResource extends ResourceBase<GoodsPack> {
         return getSession().
                 createCriteria(daoClass)
                 .add(Restrictions.eq("stockId", stockId))
+                .add(Restrictions.gt("amount", 0))
                 .list();
     }
 }

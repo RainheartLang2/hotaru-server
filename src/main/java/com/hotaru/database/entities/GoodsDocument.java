@@ -47,6 +47,7 @@ public class GoodsDocument implements Identifiable {
     private String num;
 
     @Column(name="goods")
+    @Lob
     @Convert(converter = CustomContainerJsonConverter.class)
     private CustomContainer<GoodsPackWithPrice> goods;
 

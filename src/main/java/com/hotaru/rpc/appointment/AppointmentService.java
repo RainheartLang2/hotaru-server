@@ -23,7 +23,7 @@ public class AppointmentService {
     public Appointment add(Appointment appointment, Client client, Pet pet) throws ValidationException {
         AppointmentValidationForm.INSTANCE.validate(appointment);
         if (client != null) {
-            //TODO: add validation
+            //TODO: addOrUpdate validation
             ClientInfoResource.getInstance().saveOrUpdate(client);
             appointment.setClientId(client.getId());
             if (pet != null) {
@@ -38,7 +38,7 @@ public class AppointmentService {
 
     public void update(Appointment appointment, Client client, Pet pet) throws ValidationException {
         AppointmentValidationForm.INSTANCE.validate(appointment);
-        //TODO: add validation
+        //TODO: addOrUpdate validation
         if (appointment.getClientId() == null && client != null) {
             appointment.setClientId(client.getId());
         }

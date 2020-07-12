@@ -1,6 +1,7 @@
 package com.hotaru.business.managers;
 
 import com.hotaru.business.logic.enums.DocumentState;
+import com.hotaru.business.logic.enums.ShipingType;
 import com.hotaru.database.entities.GoodsDocument;
 import com.hotaru.database.entities.GoodsPack;
 import com.hotaru.database.entities.GoodsPackWithPrice;
@@ -16,7 +17,7 @@ public class DocumentManager {
 
     private DocumentManager() {}
 
-    public void add(GoodsDocument document, boolean execute) {
+    public void addOrUpdate(GoodsDocument document, boolean execute) {
         GoodsDocumentResource.getInstance().saveOrUpdate(document);
         if (execute) {
             execute(document);
@@ -29,9 +30,32 @@ public class DocumentManager {
     }
 
     public void execute(GoodsDocument document) {
+        if (document.getShipingType() == ShipingType.Income) {
+            executeIncomeGoodsDocument(document);
+        } else if (document.getShipingType() == ShipingType.Outcome) {
+            executeOutcomeGoodsDocument(document);
+        }
+    }
+
+    private void executeIncomeGoodsDocument(GoodsDocument document) {
         GoodsPackResource goodsPackResource = GoodsPackResource.getInstance();
         for (GoodsPackWithPrice goodsPack: document.getGoods().getList()) {
             goodsPackResource.saveOrUpdate(new GoodsPack(goodsPack, document));
+        }
+        document.setDocumentState(DocumentState.Executed);
+        GoodsDocumentResource.getInstance().saveOrUpdate(document);
+    }
+
+    private void executeOutcomeGoodsDocument(GoodsDocument document) {
+        GoodsPackResource goodsPackResource = GoodsPackResource.getInstance();
+        for (GoodsPackWithPrice goodsPack: document.getGoods().getList()) {
+            GoodsPack packOnStock = goodsPackResource.getById(goodsPack.getId());
+            int amountOnStock = packOnStock.getAmount();
+            if (amountOnStock < goodsPack.getAmount()) {
+                throw new RuntimeException("Not enought amount for pack with id " + packOnStock.getId());
+            }
+            packOnStock.setAmount(amountOnStock - goodsPack.getAmount());
+            goodsPackResource.saveOrUpdate(packOnStock);
         }
         document.setDocumentState(DocumentState.Executed);
         GoodsDocumentResource.getInstance().saveOrUpdate(document);
