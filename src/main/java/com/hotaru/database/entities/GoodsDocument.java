@@ -40,7 +40,6 @@ public class GoodsDocument implements Identifiable {
     private int stockId;
 
     @Column(name="counterAgentId")
-    @NotNull
     private int counterAgentId;
 
     @Column(name="num")

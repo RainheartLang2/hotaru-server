@@ -34,6 +34,8 @@ public class DocumentManager {
             executeIncomeGoodsDocument(document);
         } else if (document.getShipingType() == ShipingType.Outcome) {
             executeOutcomeGoodsDocument(document);
+        } else if (document.getShipingType() == ShipingType.Inventory) {
+            executeInventoryGoodsDocument(document);
         }
     }
 
@@ -55,6 +57,17 @@ public class DocumentManager {
                 throw new RuntimeException("Not enought amount for pack with id " + packOnStock.getId());
             }
             packOnStock.setAmount(amountOnStock - goodsPack.getAmount());
+            goodsPackResource.saveOrUpdate(packOnStock);
+        }
+        document.setDocumentState(DocumentState.Executed);
+        GoodsDocumentResource.getInstance().saveOrUpdate(document);
+    }
+
+    private void executeInventoryGoodsDocument(GoodsDocument document) {
+        GoodsPackResource goodsPackResource = GoodsPackResource.getInstance();
+        for (GoodsPackWithPrice goodsPack: document.getGoods().getList()) {
+            GoodsPack packOnStock = goodsPackResource.getById(goodsPack.getId());
+            packOnStock.setAmount(goodsPack.getAmount());
             goodsPackResource.saveOrUpdate(packOnStock);
         }
         document.setDocumentState(DocumentState.Executed);
