@@ -12,4 +12,6 @@ public class VisitResultResource extends ArchivableResourceBase<VisitResult> {
         }
         return INSTANCE;
     }
+
+    private VisitResultResource() {}
 }

@@ -12,4 +12,6 @@ public class VisitPurposeResource extends ArchivableResourceBase<VisitPurpose> {
         }
         return INSTANCE;
     }
+
+    private VisitPurposeResource() {}
 }

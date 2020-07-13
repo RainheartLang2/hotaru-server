@@ -22,6 +22,11 @@ public class Measure implements Identifiable, Archivable {
     public Measure() {
     }
 
+    public Measure(String name) {
+        this.name = name;
+        this.deleted = false;
+    }
+
     @Override
     public int getId() {
         return id;

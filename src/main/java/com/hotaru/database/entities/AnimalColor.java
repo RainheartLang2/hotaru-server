@@ -22,6 +22,11 @@ public class AnimalColor implements Identifiable, Archivable {
     public AnimalColor() {
     }
 
+    public AnimalColor(String name) {
+        this.name = name;
+        this.deleted = false;
+    }
+
     @Override
     public int getId() {
         return id;

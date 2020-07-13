@@ -30,6 +30,14 @@ public class SalesUnit implements Identifiable, Archivable {
 
     public SalesUnit() {}
 
+    public SalesUnit(String name, SalesType type, int salesCategoryId, int measureUnitId) {
+        this.name = name;
+        this.salesType = type;
+        this.categoryId = salesCategoryId;
+        this.measureUnitId = measureUnitId;
+        this.deleted = false;
+    }
+
     @Override
     public int getId() {
         return id;

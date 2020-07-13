@@ -22,6 +22,11 @@ public class VisitPurpose implements Archivable, Identifiable {
     public VisitPurpose() {
     }
 
+    public VisitPurpose(String name) {
+        this.name = name;
+        this.deleted = deleted;
+    }
+
     @Override
     public int getId() {
         return id;

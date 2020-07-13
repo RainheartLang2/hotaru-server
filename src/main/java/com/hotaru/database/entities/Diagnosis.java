@@ -22,6 +22,11 @@ public class Diagnosis implements Identifiable, Archivable {
     public Diagnosis() {
     }
 
+    public Diagnosis(String name) {
+        this.name = name;
+        this.deleted = false;
+    }
+
     @Override
     public int getId() {
         return id;

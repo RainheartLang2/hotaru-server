@@ -12,4 +12,6 @@ public class AnimalColorResource extends ArchivableResourceBase<AnimalColor> {
         }
         return INSTANCE;
     }
+
+    private AnimalColorResource() {}
 }

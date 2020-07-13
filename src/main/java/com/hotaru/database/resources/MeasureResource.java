@@ -13,4 +13,6 @@ public class MeasureResource extends ArchivableResourceBase<Measure> {
         }
         return INSTANCE;
     }
+
+    private MeasureResource() {}
 }

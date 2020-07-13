@@ -12,4 +12,6 @@ public class SalesUnitResource extends ArchivableResourceBase<SalesUnit> {
         }
         return INSTANCE;
     }
+
+    private SalesUnitResource() {}
 }

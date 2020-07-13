@@ -22,6 +22,11 @@ public class GoodsProducer implements Identifiable, Archivable {
     public GoodsProducer() {
     }
 
+    public GoodsProducer(String name) {
+        this.name = name;
+        this.deleted = false;
+    }
+
     @Override
     public int getId() {
         return id;

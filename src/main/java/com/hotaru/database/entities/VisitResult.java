@@ -22,6 +22,11 @@ public class VisitResult implements Identifiable, Archivable {
     public VisitResult() {
     }
 
+    public VisitResult(String name) {
+        this.name = name;
+        this.deleted = false;
+    }
+
     @Override
     public int getId() {
         return id;

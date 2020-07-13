@@ -12,4 +12,6 @@ public class CounterAgentResource extends ArchivableResourceBase<CounterAgent> {
         }
         return INSTANCE;
     }
+
+    private CounterAgentResource() {}
 }

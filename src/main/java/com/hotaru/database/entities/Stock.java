@@ -31,6 +31,13 @@ public class Stock implements Identifiable, Archivable {
 
     public Stock() {}
 
+    public Stock(String name, StockType stockType, int responsiblePersonId, int clinicId) {
+        this.name = name;
+        this.stockType = stockType;
+        this.responsiblePersonId = responsiblePersonId;
+        this.clinicId = clinicId;
+    }
+
     @Override
     public int getId() {
         return id;

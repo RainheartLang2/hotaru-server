@@ -51,6 +51,14 @@ public class CounterAgent implements Identifiable, Archivable {
 
     public CounterAgent() {}
 
+    public CounterAgent(String name, String contactPersonName, PersonType personType, String phone, String email) {
+        this.name = name;
+        this.contactPersonName = contactPersonName;
+        this.personType = personType;
+        this.phone = phone;
+        this.email = email;
+    }
+
     @Override
     public int getId() {
         return id;

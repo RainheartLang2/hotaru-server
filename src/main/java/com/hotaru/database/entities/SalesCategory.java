@@ -29,6 +29,12 @@ public class SalesCategory implements Identifiable, Archivable {
     public SalesCategory() {
     }
 
+    public SalesCategory(String name, SalesType type, double extraCharge) {
+        this.name = name;
+        this.salesType = type;
+        this.extraCharge = extraCharge;
+    }
+
     public int getId() {
         return id;
     }

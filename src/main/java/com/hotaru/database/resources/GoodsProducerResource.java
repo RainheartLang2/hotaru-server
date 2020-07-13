@@ -12,4 +12,6 @@ public class GoodsProducerResource extends ArchivableResourceBase<GoodsProducer>
         }
         return INSTANCE;
     }
+
+    private GoodsProducerResource() {}
 }
