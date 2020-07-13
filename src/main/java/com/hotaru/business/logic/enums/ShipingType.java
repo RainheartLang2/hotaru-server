@@ -4,4 +4,5 @@ public enum ShipingType {
     Income,
     Outcome,
     Inventory,
+    Transfer,
 }

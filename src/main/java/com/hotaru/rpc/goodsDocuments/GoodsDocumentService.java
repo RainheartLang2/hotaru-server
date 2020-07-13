@@ -11,16 +11,19 @@ public class GoodsDocumentService {
         return GoodsDocumentResource.getInstance().getAll();
     }
 
-    public int add(GoodsDocument document, boolean execute) {
+    public GoodsDocument add(GoodsDocument document, boolean execute) {
         DocumentManager.getInstance().addOrUpdate(document, execute);
-        return document.getId();
+        return document;
     }
 
-    public void update(GoodsDocument document, boolean execute) {
+    public GoodsDocument update(GoodsDocument document, boolean execute) {
         DocumentManager.getInstance().addOrUpdate(document, execute);
+        return document;
     }
 
-    public void cancel(int documentId) {
-        DocumentManager.getInstance().cancel(GoodsDocumentResource.getInstance().getById(documentId));
+    public GoodsDocument cancel(int documentId) {
+        GoodsDocument document = GoodsDocumentResource.getInstance().getById(documentId);
+        DocumentManager.getInstance().cancel(document);
+        return document;
     }
 }

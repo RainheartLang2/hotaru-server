@@ -18,6 +18,9 @@ public class DocumentManager {
     private DocumentManager() {}
 
     public void addOrUpdate(GoodsDocument document, boolean execute) {
+        if (document.getDocumentState() == null) {
+            document.setDocumentState(DocumentState.Saved);
+        }
         GoodsDocumentResource.getInstance().saveOrUpdate(document);
         if (execute) {
             execute(document);
@@ -25,8 +28,12 @@ public class DocumentManager {
     }
 
     public void cancel(GoodsDocument document) {
-        document.setDocumentState(DocumentState.Canceled);
-        GoodsDocumentResource.getInstance().saveOrUpdate(document);
+        if (document.getShipingType() == ShipingType.Transfer) {
+            cancelTransfer(document);
+        } else {
+            document.setDocumentState(DocumentState.Canceled);
+            GoodsDocumentResource.getInstance().saveOrUpdate(document);
+        }
     }
 
     public void execute(GoodsDocument document) {
@@ -36,29 +43,26 @@ public class DocumentManager {
             executeOutcomeGoodsDocument(document);
         } else if (document.getShipingType() == ShipingType.Inventory) {
             executeInventoryGoodsDocument(document);
+        } else if (document.getShipingType() == ShipingType.Transfer) {
+            executeTransfer(document);
+        }
+    }
+
+    private void addGoodsForStock(GoodsDocument document, int stockId) {
+        GoodsPackResource goodsPackResource = GoodsPackResource.getInstance();
+        for (GoodsPackWithPrice goodsPack: document.getGoods().getList()) {
+            goodsPackResource.saveOrUpdate(new GoodsPack(goodsPack, document, stockId));
         }
     }
 
     private void executeIncomeGoodsDocument(GoodsDocument document) {
-        GoodsPackResource goodsPackResource = GoodsPackResource.getInstance();
-        for (GoodsPackWithPrice goodsPack: document.getGoods().getList()) {
-            goodsPackResource.saveOrUpdate(new GoodsPack(goodsPack, document));
-        }
+        addGoodsForStock(document, document.getStockId());
         document.setDocumentState(DocumentState.Executed);
         GoodsDocumentResource.getInstance().saveOrUpdate(document);
     }
 
     private void executeOutcomeGoodsDocument(GoodsDocument document) {
-        GoodsPackResource goodsPackResource = GoodsPackResource.getInstance();
-        for (GoodsPackWithPrice goodsPack: document.getGoods().getList()) {
-            GoodsPack packOnStock = goodsPackResource.getById(goodsPack.getId());
-            int amountOnStock = packOnStock.getAmount();
-            if (amountOnStock < goodsPack.getAmount()) {
-                throw new RuntimeException("Not enought amount for pack with id " + packOnStock.getId());
-            }
-            packOnStock.setAmount(amountOnStock - goodsPack.getAmount());
-            goodsPackResource.saveOrUpdate(packOnStock);
-        }
+        removeGoodsByDocument(document);
         document.setDocumentState(DocumentState.Executed);
         GoodsDocumentResource.getInstance().saveOrUpdate(document);
     }
@@ -71,6 +75,52 @@ public class DocumentManager {
             goodsPackResource.saveOrUpdate(packOnStock);
         }
         document.setDocumentState(DocumentState.Executed);
+        GoodsDocumentResource.getInstance().saveOrUpdate(document);
+    }
+
+    private void removeGoodsByDocument(GoodsDocument document) {
+        GoodsPackResource goodsPackResource = GoodsPackResource.getInstance();
+        for (GoodsPackWithPrice goodsPack: document.getGoods().getList()) {
+            GoodsPack packOnStock = goodsPackResource.getById(goodsPack.getId());
+            int amountOnStock = packOnStock.getAmount();
+            if (amountOnStock < goodsPack.getAmount()) {
+                throw new RuntimeException("Not enough amount for pack with id " + packOnStock.getId());
+            }
+            packOnStock.setAmount(amountOnStock - goodsPack.getAmount());
+            goodsPackResource.saveOrUpdate(packOnStock);
+        }
+    }
+
+    private void executeTransfer(GoodsDocument document) {
+        if (document.getDocumentState() == DocumentState.Saved) {
+            sentTransfer(document);
+        } else if (document.getDocumentState() == DocumentState.Sent) {
+            acceptTransfer(document);
+        }
+    }
+
+    private void sentTransfer(GoodsDocument document) {
+        removeGoodsByDocument(document);
+        document.setDocumentState(DocumentState.Sent);
+        GoodsDocumentResource.getInstance().saveOrUpdate(document);
+    }
+
+    private void acceptTransfer(GoodsDocument document) {
+        addGoodsForStock(document, document.getDestinationStockId());
+        document.setDocumentState(DocumentState.Executed);
+        GoodsDocumentResource.getInstance().saveOrUpdate(document);
+    }
+
+    private void cancelTransfer(GoodsDocument document) {
+        GoodsPackResource goodsPackResource = GoodsPackResource.getInstance();
+        if (document.getDocumentState() == DocumentState.Sent) {
+            for (GoodsPackWithPrice pack: document.getGoods().getList()) {
+                GoodsPack packOnSourceStock = goodsPackResource.getById(pack.getId());
+                packOnSourceStock.setAmount(packOnSourceStock.getAmount() + pack.getAmount());
+                goodsPackResource.saveOrUpdate(packOnSourceStock);
+            }
+        }
+        document.setDocumentState(DocumentState.Canceled);
         GoodsDocumentResource.getInstance().saveOrUpdate(document);
     }
 }

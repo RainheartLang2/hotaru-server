@@ -54,6 +54,16 @@ public class GoodsPack implements Identifiable {
         this.incomeDocumentId = incomeDocument.getId();
     }
 
+    public GoodsPack(GoodsPackWithPrice packWithPrice, GoodsDocument incomeDocument, int stockId) {
+        this.amount = packWithPrice.getAmount();
+        this.creationDate = packWithPrice.getCreationDate();
+        this.expirationDate = packWithPrice.getExpirationDate();
+        this.goodsProducerId = packWithPrice.getGoodsProducerId();
+        this.goodsTypeId = packWithPrice.getGoodsTypeId();
+        this.stockId = stockId;
+        this.incomeDocumentId = incomeDocument.getId();
+    }
+
     @Override
     public int getId() {
         return id;

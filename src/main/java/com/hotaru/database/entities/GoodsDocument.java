@@ -1,18 +1,15 @@
 package com.hotaru.database.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hotaru.business.logic.enums.DocumentState;
 import com.hotaru.business.logic.enums.ShipingType;
 import com.hotaru.core.database.Identifiable;
 import com.hotaru.core.util.container.CustomContainer;
 import com.hotaru.database.converters.CustomContainerJsonConverter;
-import com.hotaru.database.converters.GoodsWithPriceJsonConverter;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Table(name="goodsDocument")
 @Entity(name="goodsDocument")
@@ -38,6 +35,9 @@ public class GoodsDocument implements Identifiable {
     @Column(name="stockId")
     @NotNull
     private int stockId;
+
+    @Column(name="destinationStockId")
+    private int destinationStockId;
 
     @Column(name="counterAgentId")
     private int counterAgentId;
@@ -116,5 +116,13 @@ public class GoodsDocument implements Identifiable {
 
     public void setGoods(CustomContainer<GoodsPackWithPrice> goods) {
         this.goods = goods;
+    }
+
+    public int getDestinationStockId() {
+        return destinationStockId;
+    }
+
+    public void setDestinationStockId(int destinationStockId) {
+        this.destinationStockId = destinationStockId;
     }
 }
