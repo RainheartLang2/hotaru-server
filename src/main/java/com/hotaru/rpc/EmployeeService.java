@@ -12,7 +12,6 @@ import java.util.List;
 
 public class EmployeeService implements EmployeeServiceBase {
 
-    @JsonRpcMethod("EmployeeService.getAll")
     public List<Employee> getAll() {
         return EmployeeResource.getInstance().getAll();
     }
