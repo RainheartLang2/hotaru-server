@@ -15,7 +15,7 @@ public class CheckLoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         Employee employee = LoggedInUserHelper.getLoggedInEmployee();
-        if (employee == null || !employee.isActive() || employee.isDeleted()) {
+        if (employee == null) {
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         } else {

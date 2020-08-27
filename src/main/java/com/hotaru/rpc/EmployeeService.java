@@ -7,7 +7,6 @@ import com.hotaru.database.entities.Employee;
 import com.hotaru.database.entities.Login;
 import com.hotaru.database.resources.EmployeeResource;
 import com.hotaru.database.resources.LoginResource;
-import com.hotaru.rest.validation.forms.EmployeeValidationForm;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class EmployeeService implements EmployeeServiceBase {
 
     @JsonRpcMethod("EmployeeService.getAll")
     public List<Employee> getAll() {
-        return EmployeeResource.getInstance().getAllNotDeleted();
+        return EmployeeResource.getInstance().getAll();
     }
 
     public int add(Employee employee, Login login) throws ValidationException {
@@ -25,8 +24,6 @@ public class EmployeeService implements EmployeeServiceBase {
     public void update(Employee employee, Login login) throws ValidationException {
         EmployeeResource resource = EmployeeResource.getInstance();
         Employee updatedEmployee = resource.getById(employee.getId());
-        updatedEmployee.merge(employee);
-        EmployeeValidationForm.INSTANCE.validate(updatedEmployee);
         resource.saveOrUpdate(updatedEmployee);
         if (login != null) {
             login.setUserId(employee.getId());
@@ -35,6 +32,6 @@ public class EmployeeService implements EmployeeServiceBase {
     }
 
     public void delete(int id) {
-        EmployeeResource.getInstance().markDeleted(id);
+        EmployeeResource.getInstance().delete(id);
     }
 }

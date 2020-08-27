@@ -15,9 +15,6 @@ public class LoginService implements LoginServiceBase {
         Login loginFromBase = LoginResource.getInstance().getByLoginName(login);
         if (loginFromBase != null && loginFromBase.getPassword().equals(password)) {
             Employee employee = EmployeeResource.getInstance().getById(loginFromBase.getUserId());
-            if (!employee.isActive() || employee.isDeleted()) {
-                throw new IncorrectCredentialsException();
-            }
             LoggedInUserHelper.setLoggedInEmployee(employee);
             return APPLICATION_REDIRECT;
         } else {
