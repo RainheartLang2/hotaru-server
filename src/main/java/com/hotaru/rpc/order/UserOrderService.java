@@ -1,6 +1,5 @@
 package com.hotaru.rpc.order;
 
-import com.hotaru.business.enums.DeliveryType;
 import com.hotaru.business.enums.OrderState;
 import com.hotaru.business.managers.SettingsManager;
 import com.hotaru.core.exceptions.ValidationException;
