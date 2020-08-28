@@ -1,26 +1,61 @@
 package com.hotaru.rpc.setting;
 
-import com.hotaru.database.entities.SettingsRecord;
-import com.hotaru.database.resources.SettingsResource;
+import com.hotaru.business.logic.Settings;
+import com.hotaru.business.managers.SettingsManager;
 
 public class UserSettingService {
+    private class InitialSettings {
+        private int price;
+        private int deliveryPrice;
+        private int minimalDeliveryCost;
+        private int minimalDeliveryAmount;
+
+        public InitialSettings(int price, int deliveryPrice, int minimalDeliveryCost, int getMinimalDeliveryAmount) {
+            this.price = price;
+            this.deliveryPrice = deliveryPrice;
+            this.minimalDeliveryCost = minimalDeliveryCost;
+            this.minimalDeliveryAmount = getMinimalDeliveryAmount;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+
+        public int getDeliveryPrice() {
+            return deliveryPrice;
+        }
+
+        public int getMinimalDeliveryCost() {
+            return minimalDeliveryCost;
+        }
+
+        public int getMinimalDeliveryAmount() {
+            return minimalDeliveryAmount;
+        }
+    }
+
     public int getPrice() {
-        String value = SettingsResource.getInstance().getValueByKey(SettingsRecord.UNIT_PRICE_KEY);
-        return Integer.parseInt(value);
+        return SettingsManager.getInstance().getIntegerSettings(Settings.UNIT_PRICE);
     }
 
     public int getDeliveryPrice() {
-        String value = SettingsResource.getInstance().getValueByKey(SettingsRecord.DELIVERY_PRICE_KEY);
-        return Integer.parseInt(value);
+        return SettingsManager.getInstance().getIntegerSettings(Settings.DELIVERY_PRICE);
     }
 
     public int getMinimalDeliveryCost() {
-        String value = SettingsResource.getInstance().getValueByKey(SettingsRecord.MINIMAL_DELIVERY_COST);
-        return Integer.parseInt(value);
+        return SettingsManager.getInstance().getIntegerSettings(Settings.MINIMAL_DELIVERY_COST);
     }
 
     public int getMinimalDeliveryAmount() {
-        String value = SettingsResource.getInstance().getValueByKey(SettingsRecord.MINIMAL_DELIVERY_COST);
-        return Integer.parseInt(value);
+        return SettingsManager.getInstance().getIntegerSettings(Settings.MINIMAL_DELIVERY_AMOUNT);
+    }
+
+    public InitialSettings getInitialSettings() {
+        return new InitialSettings(
+                getPrice(),
+                getDeliveryPrice(),
+                getMinimalDeliveryCost(),
+                getMinimalDeliveryAmount()
+        );
     }
 }

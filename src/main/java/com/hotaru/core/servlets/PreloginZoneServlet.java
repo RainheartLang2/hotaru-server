@@ -2,11 +2,9 @@ package com.hotaru.core.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.jsonrpc4j.JsonRpcMultiServer;
-import com.hotaru.rpc.EmployeeService;
 import com.hotaru.rpc.login.LoginService;
-import com.hotaru.rpc.login.LoginServiceBase;
 import com.hotaru.rpc.order.UserOrderService;
-import com.hotaru.rpc.profile.UserProfileService;
+import com.hotaru.rpc.setting.UserSettingService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -28,7 +26,8 @@ public class PreloginZoneServlet extends HttpServlet {
 
         try {
             this.registerService(jsonRpcServer, LoginService.class);
-            this.registerService(jsonRpcServer, UserOrderService.class);
+            jsonRpcServer.addService("OrderService", new UserOrderService(), UserOrderService.class);
+            jsonRpcServer.addService("SettingsService", new UserSettingService(), UserSettingService.class);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             throw new ServletException(e);
         }

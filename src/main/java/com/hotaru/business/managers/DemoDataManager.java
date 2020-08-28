@@ -1,10 +1,9 @@
 package com.hotaru.business.managers;
 
+import com.hotaru.business.logic.Settings;
 import com.hotaru.core.exceptions.ValidationException;
 import com.hotaru.database.entities.Employee;
 import com.hotaru.database.entities.Login;
-import com.hotaru.database.entities.SettingsRecord;
-import com.hotaru.database.resources.SettingsResource;
 
 public class DemoDataManager {
     private static DemoDataManager INSTANCE = new DemoDataManager();
@@ -24,11 +23,10 @@ public class DemoDataManager {
         EmployeeManager employeeManager = EmployeeManager.getInstance();
         employeeManager.addEmployee(adminUser, adminLogin);
 
-        SettingsResource settingsResource = SettingsResource.getInstance();
-
-        settingsResource.setSetting(SettingsRecord.UNIT_PRICE_KEY, "60");
-        settingsResource.setSetting(SettingsRecord.DELIVERY_PRICE_KEY, "20");
-        settingsResource.setSetting(SettingsRecord.MINIMAL_DELIVERY_AMOUNT, "60");
-        settingsResource.setSetting(SettingsRecord.MINIMAL_DELIVERY_COST, "500");
+        SettingsManager settingsManager = SettingsManager.getInstance();
+        settingsManager.setIntegerSetting(Settings.UNIT_PRICE, 60);
+        settingsManager.setIntegerSetting(Settings.DELIVERY_PRICE, 20);
+        settingsManager.setIntegerSetting(Settings.MINIMAL_DELIVERY_AMOUNT, 60);
+        settingsManager.setIntegerSetting(Settings.MINIMAL_DELIVERY_COST, 500);
     }
 }

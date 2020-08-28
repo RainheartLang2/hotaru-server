@@ -7,10 +7,6 @@ import javax.persistence.*;
 @Table(name="settings")
 @Entity(name="settings")
 public class SettingsRecord implements Identifiable {
-    public static String UNIT_PRICE_KEY;
-    public static String DELIVERY_PRICE_KEY;
-    public static String MINIMAL_DELIVERY_COST;
-    public static String MINIMAL_DELIVERY_AMOUNT;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

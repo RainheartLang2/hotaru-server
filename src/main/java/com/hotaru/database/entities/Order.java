@@ -7,8 +7,8 @@ import com.hotaru.core.database.Identifiable;
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "order")
-@Entity(name = "order")
+@Table(name = "packOrder")
+@Entity(name = "packOrder")
 public class Order implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

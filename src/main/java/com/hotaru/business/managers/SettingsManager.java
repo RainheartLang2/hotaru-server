@@ -19,4 +19,13 @@ public class SettingsManager {
     public void setBooleanSetting(String key, boolean value) {
         SettingsResource.getInstance().setSetting(key, Boolean.toString(value));
     }
+
+    public int getIntegerSettings(String key) {
+        String stringResult = SettingsResource.getInstance().getValueByKey(key);
+        return Integer.valueOf(stringResult);
+    }
+
+    public void setIntegerSetting(String key, int value) {
+        SettingsResource.getInstance().setSetting(key, Integer.toString(value));
+    }
 }
