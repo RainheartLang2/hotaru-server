@@ -35,19 +35,19 @@ public class UserSettingService {
     }
 
     public int getPrice() {
-        return SettingsManager.getInstance().getIntegerSettings(Settings.UNIT_PRICE);
+        return SettingsManager.getInstance().getPrice();
     }
 
     public int getDeliveryPrice() {
-        return SettingsManager.getInstance().getIntegerSettings(Settings.DELIVERY_PRICE);
+        return SettingsManager.getInstance().getDeliveryPrice();
     }
 
     public int getMinimalDeliveryCost() {
-        return SettingsManager.getInstance().getIntegerSettings(Settings.MINIMAL_DELIVERY_COST);
+        return SettingsManager.getInstance().getMinimalDeliveryCost();
     }
 
     public int getMinimalDeliveryAmount() {
-        return SettingsManager.getInstance().getIntegerSettings(Settings.MINIMAL_DELIVERY_AMOUNT);
+        return SettingsManager.getInstance().getMinimalDeliveryAmount();
     }
 
     public InitialSettings getInitialSettings() {

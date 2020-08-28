@@ -23,9 +23,6 @@ public class Order implements Identifiable {
     @Column(name = "amount", length = 6)
     private int amount;
 
-    @Column(name = "cost", length = 15)
-    private int cost;
-
     @Column(name = "deliveryType", length = 13)
     private DeliveryType deliveryType;
 
@@ -34,6 +31,21 @@ public class Order implements Identifiable {
 
     @Column(name = "address", length = 400)
     private String address;
+
+    @Column(name = "additionalInfo", length = 4000)
+    private String additionalInfo;
+
+    @Column(name = "price", length = 8)
+    private int price;
+
+    @Column(name = "deliveryPrice", length = 8)
+    private int deliveryPrice;
+
+    @Column(name = "minimalDeliveryCost", length = 9)
+    private int minimalDeliveryCost;
+
+    @Column(name = "minimalDeliveryAmount", length = 9)
+    private int minimalDeliveryAmount;
 
     @Column(name = "distance", length = 5)
     private int distance;
@@ -77,14 +89,6 @@ public class Order implements Identifiable {
         this.amount = amount;
     }
 
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -123,5 +127,45 @@ public class Order implements Identifiable {
 
     public void setDeliveryType(DeliveryType deliveryType) {
         this.deliveryType = deliveryType;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getDeliveryPrice() {
+        return deliveryPrice;
+    }
+
+    public void setDeliveryPrice(int deliveryPrice) {
+        this.deliveryPrice = deliveryPrice;
+    }
+
+    public int getMinimalDeliveryCost() {
+        return minimalDeliveryCost;
+    }
+
+    public void setMinimalDeliveryCost(int minimalDeliveryCost) {
+        this.minimalDeliveryCost = minimalDeliveryCost;
+    }
+
+    public int getMinimalDeliveryAmount() {
+        return minimalDeliveryAmount;
+    }
+
+    public void setMinimalDeliveryAmount(int minimalDeliveryAmount) {
+        this.minimalDeliveryAmount = minimalDeliveryAmount;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 }
