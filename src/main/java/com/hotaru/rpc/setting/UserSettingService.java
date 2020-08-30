@@ -1,61 +1,66 @@
 package com.hotaru.rpc.setting;
 
 import com.hotaru.business.logic.Settings;
+import com.hotaru.business.logic.objects.Price;
 import com.hotaru.business.managers.SettingsManager;
+
+import java.io.IOException;
+import java.util.List;
 
 public class UserSettingService {
     private class InitialSettings {
         private int price;
-        private int deliveryPrice;
-        private int minimalDeliveryCost;
-        private int minimalDeliveryAmount;
+        private List<Price> localDeliveryPrices;
+        private List<Price> regionDeliveryPrices;
 
-        public InitialSettings(int price, int deliveryPrice, int minimalDeliveryCost, int getMinimalDeliveryAmount) {
+        public InitialSettings(int price, List<Price> localDeliveryPrices, List<Price> regionDeliveryPrices) {
             this.price = price;
-            this.deliveryPrice = deliveryPrice;
-            this.minimalDeliveryCost = minimalDeliveryCost;
-            this.minimalDeliveryAmount = getMinimalDeliveryAmount;
+            this.localDeliveryPrices = localDeliveryPrices;
+            this.regionDeliveryPrices = regionDeliveryPrices;
         }
 
         public int getPrice() {
             return price;
         }
 
-        public int getDeliveryPrice() {
-            return deliveryPrice;
+        public void setPrice(int price) {
+            this.price = price;
         }
 
-        public int getMinimalDeliveryCost() {
-            return minimalDeliveryCost;
+        public List<Price> getLocalDeliveryPrices() {
+            return localDeliveryPrices;
         }
 
-        public int getMinimalDeliveryAmount() {
-            return minimalDeliveryAmount;
+        public void setLocalDeliveryPrices(List<Price> localDeliveryPrices) {
+            this.localDeliveryPrices = localDeliveryPrices;
+        }
+
+        public List<Price> getRegionDeliveryPrices() {
+            return regionDeliveryPrices;
+        }
+
+        public void setRegionDeliveryPrices(List<Price> regionDeliveryPrices) {
+            this.regionDeliveryPrices = regionDeliveryPrices;
         }
     }
 
     public int getPrice() {
-        return SettingsManager.getInstance().getPrice();
+        return SettingsManager.getInstance().getUnitPrice();
     }
 
-    public int getDeliveryPrice() {
-        return SettingsManager.getInstance().getDeliveryPrice();
+    public List<Price> getLocalDeliveryPrices() throws IOException {
+        return SettingsManager.getInstance().getPriceSettings(Settings.LOCAL_DELIVERY_PRICES);
     }
 
-    public int getMinimalDeliveryCost() {
-        return SettingsManager.getInstance().getMinimalDeliveryCost();
+    public List<Price> getRegionDeliveryPrices() throws IOException {
+        return SettingsManager.getInstance().getPriceSettings(Settings.REGION_DELIVERY_PRICES);
     }
 
-    public int getMinimalDeliveryAmount() {
-        return SettingsManager.getInstance().getMinimalDeliveryAmount();
-    }
-
-    public InitialSettings getInitialSettings() {
+    public InitialSettings getInitialSettings() throws IOException {
         return new InitialSettings(
                 getPrice(),
-                getDeliveryPrice(),
-                getMinimalDeliveryCost(),
-                getMinimalDeliveryAmount()
+                getLocalDeliveryPrices(),
+                getRegionDeliveryPrices()
         );
     }
 }

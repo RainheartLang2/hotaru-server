@@ -1,7 +1,13 @@
 package com.hotaru.business.managers;
 
 import com.hotaru.business.logic.Settings;
+import com.hotaru.business.logic.objects.Price;
+import com.hotaru.core.util.JsonUtils;
 import com.hotaru.database.resources.SettingsResource;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingsManager {
     private static SettingsManager INSTANCE = new SettingsManager();
@@ -30,19 +36,23 @@ public class SettingsManager {
         SettingsResource.getInstance().setSetting(key, Integer.toString(value));
     }
 
-    public int getPrice() {
-        return SettingsManager.getInstance().getIntegerSettings(Settings.UNIT_PRICE);
+    public List<Price> getPriceSettings(String key) throws IOException {
+        String stringResult = SettingsResource.getInstance().getValueByKey(key);
+        return JsonUtils.parse(stringResult, ArrayList.class);
     }
 
-    public int getDeliveryPrice() {
-        return SettingsManager.getInstance().getIntegerSettings(Settings.DELIVERY_PRICE);
+    public void setPriceSettings(String key, List<Price> prices) throws IOException {
+        SettingsResource.getInstance().setSetting(key, JsonUtils.stringify(prices));
     }
 
-    public int getMinimalDeliveryCost() {
-        return SettingsManager.getInstance().getIntegerSettings(Settings.MINIMAL_DELIVERY_COST);
+    public int getUnitPrice() {
+        return getIntegerSettings(Settings.UNIT_PRICE);
+    }
+    public List<Price> getLocalDeliveryPrices() throws IOException {
+        return getPriceSettings(Settings.LOCAL_DELIVERY_PRICES);
     }
 
-    public int getMinimalDeliveryAmount() {
-        return SettingsManager.getInstance().getIntegerSettings(Settings.MINIMAL_DELIVERY_AMOUNT);
+    public List<Price> getRegionDeliveryPrices() throws IOException {
+        return getPriceSettings(Settings.REGION_DELIVERY_PRICES);
     }
 }

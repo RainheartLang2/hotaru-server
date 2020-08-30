@@ -2,7 +2,10 @@ package com.hotaru.database.entities;
 
 import com.hotaru.business.enums.DeliveryType;
 import com.hotaru.business.enums.OrderState;
+import com.hotaru.business.logic.objects.Price;
 import com.hotaru.core.database.Identifiable;
+import com.hotaru.core.util.container.CustomContainer;
+import com.hotaru.database.converters.CustomContainerJsonConverter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -38,14 +41,9 @@ public class Order implements Identifiable {
     @Column(name = "price", length = 8)
     private int price;
 
-    @Column(name = "deliveryPrice", length = 8)
-    private int deliveryPrice;
-
-    @Column(name = "minimalDeliveryCost", length = 9)
-    private int minimalDeliveryCost;
-
-    @Column(name = "minimalDeliveryAmount", length = 9)
-    private int minimalDeliveryAmount;
+    @Column(name = "deliveryPrices")
+    @Convert(converter = CustomContainerJsonConverter.class)
+    private CustomContainer<Price> deliveryPrices;
 
     @Column(name = "distance", length = 5)
     private int distance;
@@ -137,28 +135,12 @@ public class Order implements Identifiable {
         this.price = price;
     }
 
-    public int getDeliveryPrice() {
-        return deliveryPrice;
+    public CustomContainer<Price> getDeliveryPrices() {
+        return deliveryPrices;
     }
 
-    public void setDeliveryPrice(int deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
-    }
-
-    public int getMinimalDeliveryCost() {
-        return minimalDeliveryCost;
-    }
-
-    public void setMinimalDeliveryCost(int minimalDeliveryCost) {
-        this.minimalDeliveryCost = minimalDeliveryCost;
-    }
-
-    public int getMinimalDeliveryAmount() {
-        return minimalDeliveryAmount;
-    }
-
-    public void setMinimalDeliveryAmount(int minimalDeliveryAmount) {
-        this.minimalDeliveryAmount = minimalDeliveryAmount;
+    public void setDeliveryPrices(CustomContainer<Price> deliveryPrices) {
+        this.deliveryPrices = deliveryPrices;
     }
 
     public String getAdditionalInfo() {

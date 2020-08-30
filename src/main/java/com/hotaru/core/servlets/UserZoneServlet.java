@@ -23,7 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 public class UserZoneServlet extends HttpServlet {
     private JsonRpcMultiServer jsonRpcServer;
 
-    private void loadDemoData() throws ValidationException {
+    private void loadDemoData() throws ValidationException, IOException {
         Session session = SessionFactoryHolder.getSession();
         session.beginTransaction();
         try {
@@ -45,7 +45,7 @@ public class UserZoneServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         try {
             loadDemoData();
-        } catch (ValidationException e) {
+        } catch (ValidationException | IOException e) {
             e.printStackTrace();
         }
 
