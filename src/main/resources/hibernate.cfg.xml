@@ -28,5 +28,6 @@
         <mapping class="com.hotaru.database.entities.Order"/>
         <mapping class="com.hotaru.database.entities.SettingsRecord"/>
         <mapping class="com.hotaru.database.entities.Region"/>
+        <mapping class="com.hotaru.database.entities.Locality"/>
     </session-factory>
 </hibernate-configuration>
