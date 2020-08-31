@@ -10,6 +10,7 @@ import com.hotaru.core.exceptions.ValidationException;
 import com.hotaru.rpc.EmployeeService;
 import com.hotaru.rpc.order.AdminOrderService;
 import com.hotaru.rpc.profile.UserProfileService;
+import com.hotaru.rpc.setting.AdminSettingService;
 import org.hibernate.Session;
 
 import javax.servlet.ServletConfig;
@@ -55,6 +56,7 @@ public class UserZoneServlet extends HttpServlet {
             registerService(jsonRpcServer, EmployeeService.class);
             registerService(jsonRpcServer, UserProfileService.class);
             jsonRpcServer.addService("OrderService", new AdminOrderService(), AdminOrderService.class);
+            jsonRpcServer.addService("SettingsService", new AdminSettingService(), AdminSettingService.class);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             throw new ServletException(e);
         }

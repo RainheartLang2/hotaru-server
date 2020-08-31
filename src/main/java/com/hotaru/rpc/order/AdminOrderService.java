@@ -7,7 +7,7 @@ import com.hotaru.database.resources.OrderResource;
 import java.util.Date;
 import java.util.List;
 
-public class AdminOrderService {
+public class AdminOrderService extends UserOrderService {
     public List<Order> getList(Date from, Date to) {
         return OrderResource.getInstance().getByDateRange(from, to);
     }

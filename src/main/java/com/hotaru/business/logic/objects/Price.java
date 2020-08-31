@@ -11,6 +11,8 @@ public class Price {
         this.value = value;
     }
 
+    public Price() {}
+
     public int getFrom() {
         return from;
     }
