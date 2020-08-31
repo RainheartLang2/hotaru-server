@@ -44,4 +44,12 @@ public class Locality implements Identifiable {
     public void setRegionId(int regionId) {
         this.regionId = regionId;
     }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
 }
