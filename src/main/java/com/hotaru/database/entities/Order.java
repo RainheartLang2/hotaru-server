@@ -41,12 +41,12 @@ public class Order implements Identifiable {
     @Column(name = "price", length = 8)
     private int price;
 
+    @Column(name = "localityId")
+    private Integer localityId;
+
     @Column(name = "deliveryPrices")
     @Convert(converter = CustomContainerJsonConverter.class)
     private CustomContainer<Price> deliveryPrices;
-
-    @Column(name = "distance", length = 5)
-    private int distance;
 
     @Column(name = "creationDate")
     private Date creationDate;
@@ -95,14 +95,6 @@ public class Order implements Identifiable {
         this.address = address;
     }
 
-    public int getDistance() {
-        return distance;
-    }
-
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
-
     public Date getCreationDate() {
         return creationDate;
     }
@@ -149,5 +141,13 @@ public class Order implements Identifiable {
 
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
+    }
+
+    public Integer getLocalityId() {
+        return localityId;
+    }
+
+    public void setLocalityId(Integer localityId) {
+        this.localityId = localityId;
     }
 }
