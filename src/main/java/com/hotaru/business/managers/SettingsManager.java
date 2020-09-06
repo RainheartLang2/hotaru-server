@@ -48,6 +48,10 @@ public class SettingsManager {
     public int getUnitPrice() {
         return getIntegerSettings(Settings.UNIT_PRICE);
     }
+
+    public int getSupplyPrice() {
+        return getIntegerSettings(Settings.SUPPLY_PRICE);
+    }
     public List<Price> getLocalDeliveryPrices() throws IOException {
         return getPriceSettings(Settings.LOCAL_DELIVERY_PRICES);
     }

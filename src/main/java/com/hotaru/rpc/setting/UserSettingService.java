@@ -48,6 +48,10 @@ public class UserSettingService {
         return SettingsManager.getInstance().getUnitPrice();
     }
 
+    public int getSupplyPrice() {
+        return SettingsManager.getInstance().getSupplyPrice();
+    }
+
     public List<Price> getLocalDeliveryPrices() throws IOException {
         return SettingsManager.getInstance().getPriceSettings(Settings.LOCAL_DELIVERY_PRICES);
     }
