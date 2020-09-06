@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminSettingService extends UserSettingService {
-    public void update(int price, List<Price> localDeliveryPrices, List<Price> regionDeliveryPrices) throws IOException {
+    public void update(int price,
+                       int supplyPrice,
+                       List<Price> localDeliveryPrices,
+                       List<Price> regionDeliveryPrices) throws IOException {
         SettingsManager settingsManager = SettingsManager.getInstance();
         settingsManager.setIntegerSetting(Settings.UNIT_PRICE, price);
+        settingsManager.setIntegerSetting(Settings.SUPPLY_PRICE, supplyPrice);
 
         settingsManager.setPriceSettings(Settings.LOCAL_DELIVERY_PRICES, new ArrayList<Price>(localDeliveryPrices));
         settingsManager.setPriceSettings(Settings.REGION_DELIVERY_PRICES, regionDeliveryPrices);
