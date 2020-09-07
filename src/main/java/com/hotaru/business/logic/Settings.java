@@ -7,4 +7,5 @@ public class Settings {
     public static final String LOCAL_DELIVERY_PRICES = "localDeliveryPrices";
     public static final String REGION_DELIVERY_PRICES = "regionDeliveryPrices";
     public static final String CLIENT_SOURCE = "clientSource";
+    public static final String ADMIN_APP_REDIRECT = "adminAppRedirect";
 }
