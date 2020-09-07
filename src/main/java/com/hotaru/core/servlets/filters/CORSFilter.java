@@ -1,5 +1,8 @@
 package com.hotaru.core.servlets.filters;
 
+import com.hotaru.business.logic.Settings;
+import com.hotaru.business.managers.SettingsManager;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +22,7 @@ public class CORSFilter implements Filter {
         response.addHeader(ALLOWED_METHODS_HEADER, "GET, POST, PUT, PATCH, DELETE, HEAD");
         response.addHeader(ALLOWED_HEADERS_HEADER, "origin, content-type, accept, authorization");
         response.addHeader(ALLOWED_CREDENTIALS_HEADER, "true");
-        response.addHeader(ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "http://localhost:3000");
+        response.addHeader(ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, SettingsManager.getInstance().getStringSetting(Settings.CLIENT_SOURCE));
 
         filterChain.doFilter(servletRequest, servletResponse);
    }

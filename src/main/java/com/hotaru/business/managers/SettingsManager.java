@@ -36,6 +36,14 @@ public class SettingsManager {
         SettingsResource.getInstance().setSetting(key, Integer.toString(value));
     }
 
+    public String getStringSetting(String key) {
+        return SettingsResource.getInstance().getValueByKey(key);
+    }
+
+    public void setStringSettings(String key, String value) {
+        SettingsResource.getInstance().setSetting(key, value);
+    }
+
     public List<Price> getPriceSettings(String key) throws IOException {
         String stringResult = SettingsResource.getInstance().getValueByKey(key);
         return JsonUtils.parse(stringResult, ArrayList.class);

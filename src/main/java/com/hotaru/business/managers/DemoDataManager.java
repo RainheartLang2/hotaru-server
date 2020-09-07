@@ -32,6 +32,7 @@ public class DemoDataManager {
         SettingsManager settingsManager = SettingsManager.getInstance();
         settingsManager.setIntegerSetting(Settings.UNIT_PRICE, 220);
         settingsManager.setIntegerSetting(Settings.SUPPLY_PRICE, 120);
+        settingsManager.setStringSettings(Settings.CLIENT_SOURCE, "http://f953502h.beget.tech/");
 
         List<Price> closeDeliveryPrices = new ArrayList<>(Arrays.asList(
                 new Price(0, 10, 400),
