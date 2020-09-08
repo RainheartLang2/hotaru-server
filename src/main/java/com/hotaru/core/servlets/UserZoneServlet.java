@@ -46,6 +46,7 @@ public class UserZoneServlet extends HttpServlet {
     }
 
     public void init(ServletConfig config) throws ServletException {
+        config.getServletContext().getSessionCookieConfig().setSecure(true);
         try {
             loadDemoData();
         } catch (ValidationException | IOException e) {
