@@ -10,7 +10,7 @@ import java.io.IOException;
 @WebFilter(filterName = "dbTransactionFilter")
 public class DBTransactionFilter implements Filter {
 
-    //изменения для тестового коммита
+    //изменения для тестового коммита2
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         Session session = SessionFactoryHolder.getSession();
